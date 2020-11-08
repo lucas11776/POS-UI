@@ -7,6 +7,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LayoutsModule } from './layouts/layouts/layouts.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
     NgxSpinnerModule,
     AppRoutingModule,
     ToastrModule.forRoot({}),
+    LayoutsModule,
   ],
   providers: [  ],
   bootstrap: [ AppComponent ],
