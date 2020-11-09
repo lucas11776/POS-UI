@@ -1,0 +1,146 @@
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <div class="card bg-secondary border-0">
+            <div class="card-body px-lg-5 py-lg-5">
+                <div class="text-center text-muted mb-4">
+                    <!-- <small>Or sign up with credentials</small> -->
+                </div>
+                <form role="form" [formGroup]="form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Firstname -->
+                            <div class="form-group mb-3">
+                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.first_name.invalid && form.controls.first_name.dirty }">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-user-alt"></i></span>
+                                    </div>
+                                    <input name="first_name" class="form-control" placeholder="Name" type="text" formControlName="first_name">
+                                </div>
+                                <div class="invalid-feedback" *ngIf="form.controls.first_name.dirty">
+                                    <span *ngIf="form.controls.first_name.errors.required">{{ formErrors.first_name.required }}</span>
+                                    <span *ngIf="form.controls.first_name.errors.minLength">{{ formErrors.first_name.min }}</span>
+                                    <span *ngIf="form.controls.first_name.errors.maxLength">{{ formErrors.first_name.max }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Lastname -->
+                            <div class="form-group mb-3">
+                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.last_name.invalid && form.controls.last_name.dirty }">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-user-circle"></i></span>
+                                    </div>
+                                    <input name="last_name" class="form-control" placeholder="Surname" type="text" formControlName="last_name">
+                                </div>
+                                <div class="invalid-feedback" *ngIf="form.controls.last_name.dirty">
+                                    <span *ngIf="form.controls.last_name.errors.required">{{ formErrors.last_name.required }}</span>
+                                    <span *ngIf="form.controls.last_name.errors.minLength">{{ formErrors.last_name.min }}</span>
+                                    <span *ngIf="form.controls.last_name.errors.maxLength">{{ formErrors.last_name.max }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Gender -->
+                            <div class="form-group">
+                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.gender.invalid && form.controls.gender.dirty }">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-genderless"></i></span>
+                                    </div>
+                                    <select name="gender" class="form-control text-capitalize" formControlName="gender">
+                                        <option hidden value="" disabled selected>Gender</option>
+                                        <option *ngFor="let g of gender" [value]="g">{{ g }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Email -->
+                            <div class="form-group mb-3">
+                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.email.invalid && form.controls.email.dirty }">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                    </div>
+                                    <input name="email" class="form-control" placeholder="Email" type="email" formControlName="email">
+                                </div>
+                                <div class="invalid-feedback" *ngIf="form.controls.email.dirty">
+                                    <span *ngIf="form.controls.email.errors.required">{{ formErrors.email.required_empty_cellphone }}</span>
+                                    <span *ngIf="form.controls.email.errors.email">{{ formErrors.email.email }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Cellphone Number -->
+                            <div class="form-group mb-3">
+                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.cellphone_number.invalid && form.controls.cellphone_number.dirty }">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-mobile"></i></span>
+                                    </div>
+                                    <input name="cellphone_number" class="form-control" placeholder="Cellphone Number" type="tel" formControlName="cellphone_number">
+                                </div>
+                                <div class="invalid-feedback" *ngIf="form.controls.cellphone_number.dirty">
+                                    <span *ngIf="form.controls.cellphone_number.errors.required">{{ formErrors.cellphone_number.required_empty_email }}</span>
+                                    <span *ngIf="form.controls.cellphone_number.errors.pattern">{{ formErrors.cellphone_number.invalid }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Password -->
+                            <div class="form-group mb-3">
+                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.password.invalid && form.controls.password.dirty }">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                    </div>
+                                    <input name="password" class="form-control" placeholder="Password" type="password" formControlName="password">
+                                </div>
+                                <div class="invalid-feedback" *ngIf="form.controls.password.dirty">
+                                    <span *ngIf="form.controls.password.errors.required">{{ formErrors.password.required }}</span>
+                                    <span *ngIf="form.controls.password.errors.minLength">{{ formErrors.password.min }}</span>
+                                    <span *ngIf="form.controls.password.errors.maxLength">{{ formErrors.password.max }}</span>
+                                    <span *ngIf="form.controls.password.errors.pattern">{{ formErrors.password.invalid }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Password Confirmation -->
+                            <div class="form-group mb-3">
+                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.password_confirmation.invalid && form.controls.password_confirmation.dirty }">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-lock-open"></i></span>
+                                    </div>
+                                    <input name="password_confirmation" class="form-control" placeholder="Password Confirmation" type="password" formControlName="password_confirmation">
+                                </div>
+                                <div class="invalid-feedback" *ngIf="form.controls.password_confirmation.dirty">
+                                    <span *ngIf="form.controls.password_confirmation.errors.required">{{ formErrors.password_confirmation.required }}</span>
+                                    <span *ngIf="form.controls.password_confirmation.errors.compare">{{ formErrors.password_confirmation.match }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary mt-4" [disabled]="form.invalid" (click)="register()">
+                            Create account
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6">
+                <a [routerLink]="['', 'auth', 'login']" class="text-light">
+                    <small>Already have an account</small>
+                </a>
+            </div>
+            <div class="col-6 text-right">
+                <a href="#" class="text-light">
+                    <small>Forgot password?</small>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

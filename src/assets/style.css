@@ -1,0 +1,17 @@
+/* Input Group Validation */
+
+.input-group.is-invalid {
+    border: 1px solid var(--warning);
+}
+
+.input-group.is-invalid~.invalid-feedback {
+    display: block;
+}
+
+.input-group.is-valid {
+    border: 1px solid var(--success);
+}
+
+.input-group.is-valid~.valid-feedback {
+    display: block;
+}

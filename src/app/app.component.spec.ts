@@ -1,13 +1,11 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
-import { JwtOptionsProvider } from './shared/providers/jwtOptionsProvider';
 
 describe('AppComponent', () => {
   let appComponent: AppComponent;
@@ -24,7 +22,6 @@ describe('AppComponent', () => {
         RouterTestingModule,
         AuthenticationModule,
         NgxSpinnerModule,
-        JwtModule.forRoot({ jwtOptionsProvider: JwtOptionsProvider }),
       ],
     }).compileComponents();
   }));
@@ -35,7 +32,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should check if AppComponent is created.', () => {
+  it('should create AppComponent.', () => {
     expect(appComponent).toBeTruthy();
   });
 

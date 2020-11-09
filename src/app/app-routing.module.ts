@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthenticationComponent } from './layouts/layouts/authentication/authentication.component'; 
+ 
 const routes: Routes = [
     {
-        path: 'authentication',
+        path: 'auth',
+        component: AuthenticationComponent,
         loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule) 
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 ];
 
