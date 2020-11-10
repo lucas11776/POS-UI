@@ -1,21 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Subscription } from 'rxjs';
 
+import { AuthenticationService } from '../../../../core/authentication/authentication.service';
 import { Gender } from '../../../../shared/models/gender.model';
 import { Errors } from '../../../../shared/errors/form.error';
-import { Register } from '../../../../shared/models/authentication.model';
+import { Register, Token } from '../../../../shared/models/authentication.model';
+import { TokenService } from '../../../../core/authentication/token.service';
 
 @Component({
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  gender: string[] = Gender;
   formErrors = Errors;
+  gender: string[] = Gender;
+  registerSubscription: Subscription;
+  error;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _authenticationService: AuthenticationService,
+    private _tokenService: TokenService,
+    private _ngxSpinnerService: NgxSpinnerService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -37,7 +49,25 @@ export class RegisterComponent implements OnInit {
     return ! form.email;
   }
 
-  register() {
-    console.log(this.form.value);
+  register(): void {
+    this.error = null;
+    this._ngxSpinnerService.show();
+    this.registerSubscription = this._authenticationService.register<Token>(this.form.value)
+      .subscribe(token => this.registered(token), error => this.registrationFailed(error));
+  }
+
+  ngOnDestroy(): void {
+    if(this.registerSubscription) this.registerSubscription.unsubscribe();
+  }
+
+  protected registered(token: Token): void {
+    this._tokenService.store(token);
+    this._ngxSpinnerService.hide();
+    this._router.navigate(['/']);
+  }
+
+  protected registrationFailed(error: Error): void {
+    this.error = error;
+    this._ngxSpinnerService.hide();
   }
 }

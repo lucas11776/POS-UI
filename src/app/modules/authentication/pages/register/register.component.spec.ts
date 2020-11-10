@@ -1,17 +1,28 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { of, throwError } from 'rxjs';
 import faker from 'faker';
 
 import { RegisterComponent } from './register.component';
 import { Register } from '../../../../shared/models/authentication.model';
 import { Errors } from '../../../../shared/errors/form.error';
-import { Register as RegisterMock } from 'src/app/core/mocks/authentication.mock';
+import { Register as RegisterMock, Token } from '../../../../core/mocks/authentication.mock';
+import { AuthenticationService } from '../../../../core/authentication/authentication.service';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
   let registerMock: Register;
+  let authenticationService: AuthenticationService;
+  let cookieService: CookieService;
+  let ngxSpinnerService: NgxSpinnerService;
+  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -20,7 +31,10 @@ describe('RegisterComponent', () => {
       ],
       imports: [
         RouterTestingModule,
+        HttpClientTestingModule,
         ReactiveFormsModule,
+        ToastrModule.forRoot({}),
+        NgxSpinnerModule
       ]
     })
     .compileComponents();
@@ -30,7 +44,21 @@ describe('RegisterComponent', () => {
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
     registerMock = RegisterMock();
+    authenticationService = TestBed.inject(AuthenticationService);
+    cookieService = TestBed.inject(CookieService);
+    ngxSpinnerService = TestBed.inject(NgxSpinnerService);
+    router = TestBed.inject(Router);
     fixture.detectChanges();
+  });
+
+  beforeEach(() => {
+    spyOn(ngxSpinnerService, 'show').and.returnValue();
+    spyOn(ngxSpinnerService, 'hide').and.returnValue();
+    spyOn(router, 'navigate').and.returnValue(new Promise<boolean>((rs,rj) => rs(true)));
+  });
+
+  afterEach(() => {
+    cookieService.deleteAll();
   });
 
   it('should create RegisterComponent.', () => {
@@ -166,4 +194,55 @@ describe('RegisterComponent', () => {
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain(Errors.password_confirmation.match);
   });
+
+  it('should clear error message when tring to register.', () => {
+    component.error = { message: 'Something went wrong please try again.' };
+    component.register()
+    expect(component.error).toBeNull();
+  });
+
+  it('should display spinner when making register request.', () => {
+    component.register();
+    expect(ngxSpinnerService.show).toHaveBeenCalled();
+  });
+
+  it('should register user and store user token.', fakeAsync(() => {
+    spyOn(authenticationService, 'register').and.returnValue(of(Token()));
+    component.register();
+    tick();
+    expect(document.cookie).toContain(Token().token);
+  }));
+
+  it('should hide spinner when register request is complete.', fakeAsync(() => {
+    spyOn(authenticationService, 'register').and.returnValue(of(Token()));
+    component.register();
+    tick();
+    expect(ngxSpinnerService.hide).toHaveBeenCalled();
+  }));
+
+  it('should redirect user after user has been registered successfully.', fakeAsync(() => {
+    spyOn(authenticationService, 'register').and.returnValue(of(Token()));
+    component.register();
+    tick();
+    expect(router.navigate).toHaveBeenCalled();
+  }));
+
+  it('should assign error to error when register request failed.', fakeAsync(()=> {
+    let error = {
+      message: 'Invalid form value', errors: {
+        email: 'Email address already exists in database.'
+      }
+    };
+    spyOn(authenticationService, 'register').and.returnValue(throwError(error));
+    component.register();
+    tick();
+    expect(component.error).toEqual(error);
+  }));
+
+  it('should hide spinner if register request failed.', fakeAsync(() => {
+    spyOn(authenticationService, 'register').and.returnValue(throwError({}));
+    component.register();
+    tick();
+    expect(ngxSpinnerService.hide).toHaveBeenCalled();
+  }));
 });

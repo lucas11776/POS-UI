@@ -10,7 +10,7 @@
                     <div class="form-group mb-3">
                         <div class="input-group input-group-merge input-group-alternative" [ngClass]="{'is-invalid': form.controls.username.invalid && form.controls.username.dirty}">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
                             </div>
                             <input name="username" class="form-control" placeholder="Email / Cellphone Number" type="text" formControlName="username">
                         </div>
@@ -37,7 +37,9 @@
                         </label>
                     </div>
                     <div class="text-center">
-                        <button type="button" class="btn btn-primary btn-block my-4">Sign in</button>
+                        <button type="button" class="btn btn-primary btn-block my-4" [disabled]="form.invalid" (click)="login()">
+                            Sign in
+                        </button>
                     </div>
                 </form>
             </div>
@@ -47,7 +49,7 @@
                 <a href="#" class="text-light"><small>Forgot password?</small></a>
             </div>
             <div class="col-6 text-right">
-                <a href="#" class="text-light"><small>Create new account</small></a>
+                <a [routerLink]="['/', 'auth', 'register']" class="text-light"><small>Create new account</small></a>
             </div>
         </div>
     </div>
