@@ -15,7 +15,7 @@
                             <input name="username" class="form-control" placeholder="Email / Cellphone Number" type="text" formControlName="username">
                         </div>
                         <div class="invalid-feedback" *ngIf="form.controls.username.dirty">
-                            <span *ngIf="form.controls.username.errors.required">{{ formErrors.username.required }}</span>
+                            <span *ngIf="form.controls.username.errors?.required">{{ formErrors.username.required }}</span>
                         </div>
                     </div>
                     <!-- Password -->
@@ -27,7 +27,7 @@
                             <input name="password" class="form-control" placeholder="Password" type="password" formControlName="password">
                         </div>
                         <div class="invalid-feedback" *ngIf="form.controls.password.dirty">
-                            <span *ngIf="form.controls.password.errors.required">{{ formErrors.password.required }}</span>
+                            <span *ngIf="form.controls.password.errors?.required">{{ formErrors.password.required }}</span>
                         </div>
                     </div>
                     <div class="custom-control custom-control-alternative custom-checkbox">

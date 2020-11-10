@@ -8,7 +8,7 @@ import { Options } from '../../shared/models/http.model';
   providedIn: 'root'
 })
 export class HttpService {
-  static readonly HOST = 'http://localhost';
+  static readonly HOST = 'http://192.168.0.147:81/api';
 
   constructor(private _http: HttpClient) { }
 

@@ -5,6 +5,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { CookieService } from 'ngx-cookie-service';
+import { JwtModule } from '@auth0/angular-jwt';
 import { of, throwError } from 'rxjs';
 
 import { LoginComponent } from './login.component';
@@ -12,6 +13,7 @@ import { Login } from '../../../../shared/models/authentication.model';
 import { Login as LoginMock, Token } from '../../../../core/mocks/authentication.mock';
 import { Errors } from '../../../../shared/errors/form.error';
 import { AuthenticationService } from '../../../../core/authentication/authentication.service';
+import { JwtOptionsProvider } from '../../../../core/providers/jwtOptions.provider';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -32,6 +34,7 @@ describe('LoginComponent', () => {
         ReactiveFormsModule,
         NgxSpinnerModule,
         HttpClientTestingModule,
+        JwtModule.forRoot({ jwtOptionsProvider: JwtOptionsProvider }),
       ]
     })
     .compileComponents();

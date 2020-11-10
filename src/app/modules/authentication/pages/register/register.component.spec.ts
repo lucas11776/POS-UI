@@ -3,10 +3,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of, throwError } from 'rxjs';
+import { JwtModule } from '@auth0/angular-jwt';
 import faker from 'faker';
 
 import { RegisterComponent } from './register.component';
@@ -14,6 +14,7 @@ import { Register } from '../../../../shared/models/authentication.model';
 import { Errors } from '../../../../shared/errors/form.error';
 import { Register as RegisterMock, Token } from '../../../../core/mocks/authentication.mock';
 import { AuthenticationService } from '../../../../core/authentication/authentication.service';
+import { JwtOptionsProvider } from '../../../../core/providers/jwtOptions.provider';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -33,8 +34,8 @@ describe('RegisterComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         ReactiveFormsModule,
-        ToastrModule.forRoot({}),
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        JwtModule.forRoot({ jwtOptionsProvider: JwtOptionsProvider })
       ]
     })
     .compileComponents();

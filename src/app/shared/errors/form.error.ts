@@ -12,7 +12,7 @@ export const Errors = {
     gender: { },
     email: {
         required: 'The email is required',
-        required_empty_cellphone: 'The email is required is cellphone number is not entered.',
+        required_empty_cellphone: 'The email is required if cellphone number is not entered.',
         email: 'The email address entered is a invalid email.'
     },
     cellphone_number: {

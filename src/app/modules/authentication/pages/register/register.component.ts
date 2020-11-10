@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       'last_name': [null, [RxwebValidators.required(), RxwebValidators.minLength({ value: 3 }), RxwebValidators.maxLength({ value: 50 })]],
       'gender': ['', [RxwebValidators.oneOf({ matchValues: Gender })]],
       'email': [null, [RxwebValidators.required({ conditionalExpression: this.cellphoneNotEmpty }), RxwebValidators.email()]],
-      'cellphone_number': [null, [RxwebValidators.required({ conditionalExpression: this.emailNotEmpty }), RxwebValidators.pattern({expression: { pattern: /\+[0-9]{12,12}/ }})]],
+      'cellphone_number': [null, [RxwebValidators.required({ conditionalExpression: this.emailNotEmpty }), RxwebValidators.pattern({expression: { pattern: /\+[0-9]{11,11}/ }})]],
       'password': [null, [RxwebValidators.required(), RxwebValidators.minLength({ value: 8 }), RxwebValidators.maxLength({ value: 20 }), RxwebValidators.pattern({ expression: { pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])/ } })]],
       'password_confirmation': [null, [RxwebValidators.required(), RxwebValidators.compare({ fieldName: 'password' })]]
     });
