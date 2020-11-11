@@ -7,7 +7,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { LayoutsModule } from './layouts/layouts/layouts.module';
+import { LayoutsModule } from './layouts/layouts.module';
 
 @NgModule({
   declarations: [
