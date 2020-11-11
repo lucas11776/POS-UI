@@ -60,3 +60,4 @@
 [1110/173122.467:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1110/173734.533:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\THEMBA~1\AppData\Local\Temp\karma-36363068\Crashpad\attachments\c709f8f8-6fba-456a-96d8-67b27e04a026: The system cannot find the path specified. (0x3)
 [1110/173735.770:ERROR:http_transport_win.cc(276)] WinHttpSendRequest: The operation completed successfully. (0x0)
+[1111/070838.500:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

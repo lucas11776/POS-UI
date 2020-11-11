@@ -5,17 +5,17 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
 
-import { GuestGuard } from './guest.guard';
+import { UserGuard } from './user.guard';
 import { TokenService } from '../authentication/token.service';
 import { AuthenticationService } from '../authentication/authentication.service';
-import { Token } from '../mocks/authentication.mock';
 import { JwtOptionsProvider } from '../providers/jwtOptions.provider';
+import { Token } from '../mocks/authentication.mock';
 
-describe('GuestGuard', () => {
-  let guard: GuestGuard;
+describe('UserGuard', () => {
+  let guard: UserGuard;
   let tokenService: TokenService;
-  let cookieService: CookieService;
   let authenticationService: AuthenticationService;
+  let cookieService: CookieService;
   let router: Router;
 
   beforeEach(() => {
@@ -23,44 +23,43 @@ describe('GuestGuard', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        JwtModule.forRoot({ jwtOptionsProvider: JwtOptionsProvider }),
+        JwtModule.forRoot({ jwtOptionsProvider: JwtOptionsProvider })
       ]
     });
   });
 
   beforeEach(() => {
-    guard = TestBed.inject(GuestGuard);
+    guard = TestBed.inject(UserGuard);
     tokenService = TestBed.inject(TokenService);
-    cookieService = TestBed.inject(CookieService);
     authenticationService = TestBed.inject(AuthenticationService);
+    cookieService = TestBed.inject(CookieService);
     router = TestBed.inject(Router);
   });
 
   beforeEach(() => {
-    spyOn(router, 'navigate').and.returnValue(new Promise<boolean>((rs, rj) => rs.call(true)));
+    spyOn(router, 'navigate').and.returnValue(new Promise<boolean>((rs,rj) => rs.call(true)));
   });
 
   afterEach(() => {
     cookieService.deleteAll();
   });
 
-  it('should create Guest guard.', () => {
+  it('should create User guard.', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('should return true if the user is not loggedin.', () => {
+  it('should check if user is loggedin guard return true.', () => {
+    tokenService.store(Token());
     let allowed = guard.canActivate(<any>{}, <any>{});
     expect(allowed).toBeTrue();
   });
 
-  it('should return false if user if loggedin.', () => {
-    tokenService.store(Token());
+  it('should check if user is not loggedin guard return false.', () => {
     let allowed = guard.canActivate(<any>{}, <any>{});
     expect(allowed).toBeFalse();
   });
-  
-  it('should redirect user to home route if user is loggedin.', () => {
-    tokenService.store(Token());
+
+  it('should redirect user to login route is user is not logged in', () => {
     guard.canActivate(<any>{}, <any>{});
     expect(router.navigate).toHaveBeenCalled();
   });
