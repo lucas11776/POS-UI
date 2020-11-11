@@ -57,3 +57,6 @@
 [1110/160759.021:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1110/171159.935:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
 [1110/171200.272:ERROR:exception_snapshot_win.cc(99)] thread ID 12092 not found in process
+[1110/173122.467:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1110/173734.533:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\THEMBA~1\AppData\Local\Temp\karma-36363068\Crashpad\attachments\c709f8f8-6fba-456a-96d8-67b27e04a026: The system cannot find the path specified. (0x3)
+[1110/173735.770:ERROR:http_transport_win.cc(276)] WinHttpSendRequest: The operation completed successfully. (0x0)

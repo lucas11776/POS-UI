@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 import { AuthenticationService } from '../authentication/authentication.service';
 
@@ -8,9 +8,13 @@ import { AuthenticationService } from '../authentication/authentication.service'
 })
 export class GuestGuard implements CanActivate {
 
-  constructor(private _authenticationService: AuthenticationService) { }
+  constructor(
+    private _authenticationService: AuthenticationService,
+    private _router: Router) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return !this._authenticationService.loggedin();
+    const isGuest = !this._authenticationService.loggedin();
+    if(!isGuest) this._router.navigate(['/']);
+    return isGuest;
   }
 }
