@@ -16,6 +16,11 @@ const routes: Routes = [
         loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule) 
     },
     {
+        path: 'products',
+        component: DashboardComponent,
+        loadChildren: () => import('./modules/products/products.module').then(m => m.ProductsModule)
+    },
+    {
         path: '**',
         redirectTo: ''
     }
