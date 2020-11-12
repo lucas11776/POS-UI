@@ -1,9 +1,10 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, Inject, OnDestroy } from '@angular/core';
 import { ChangeDetectionStrategy, NgZone } from '@angular/core';
+import { Subscription, timer } from 'rxjs';
 
 import { CookieService } from 'ngx-cookie-service';
-import { timer } from 'rxjs';
+import { SidebarService } from '../../services/sidebar.service';
 
 declare let $: any;
 
@@ -17,13 +18,17 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('sidenav', { read: ElementRef }) sidenav: ElementRef;
   @ViewChild('scrollbar', { read: ElementRef }) scrollbar: ElementRef;
   @ViewChild('sidenavToggler', { read: ElementRef }) sidenavToggler: ElementRef;
+  sidebarSubscription: Subscription;
 
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private _ngZone: NgZone,
-    private _cookieService: CookieService) { }
+    private _cookieService: CookieService,
+    private _sidebarService: SidebarService) { }
 
   ngOnInit(): void {
+    this.sidebarSubscription = this._sidebarService.togglerObservable
+      .subscribe(_ => this.sidenavToggle());
   }
 
   ngAfterViewInit(): void {
@@ -43,6 +48,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.removeSidenavMargin();
+    /* istanbul ignore else */
+    if(this.sidebarSubscription) this.sidebarSubscription.unsubscribe();
   }
 
   protected sidenavSetup(): void {
@@ -68,8 +75,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   protected unpinSidenav(): void {
     $(this.sidenavToggler.nativeElement).removeClass('active');
-    $(document.body).removeClass('g-sidenav-pinned').addClass('g-sidenav-hidden');
-    $(document.body).find('.backdrop').remove();
+    $(this._document.body).removeClass('g-sidenav-pinned').addClass('g-sidenav-hidden');
+    $(this._document.body).find('.backdrop').remove();
     this._cookieService.set('sidenav-state', 'unpinned');
     /* istanbul ignore else */
     if($(window).width() >= 1200) this.assignUnpinnedSidenavMargin()
@@ -107,9 +114,12 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   protected bodyClick() {
-    $(this._document.body).click(() => {
+    $(this._document.body).click((e: Event) => {
       /* istanbul ignore else */
-      if($(window).width() < 1200) this.unpinSidenav()
+      if($(e.target).is('body')) { 
+        /* istanbul ignore else */
+        if($(window).width() < 1200) this.unpinSidenav()
+      }
     });
   }
 

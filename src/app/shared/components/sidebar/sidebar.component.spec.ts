@@ -2,6 +2,7 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 import { CookieService } from 'ngx-cookie-service';
 
 import { SidebarComponent } from './sidebar.component';
+import { SidebarService } from '../../services/sidebar.service'
 
 declare let $: any;
 
@@ -9,6 +10,7 @@ describe('SidebarComponent', () => {
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;
   let cookieService: CookieService;
+  let sidebarService: SidebarService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -23,6 +25,7 @@ describe('SidebarComponent', () => {
     fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;
     cookieService = TestBed.inject(CookieService);
+    sidebarService = TestBed.inject(SidebarService);
     fixture.detectChanges();
   });
 
@@ -107,4 +110,10 @@ describe('SidebarComponent', () => {
     expect($(document.body).css('margin-left')).toBe('250px');
   });
 
+  it('should toggle sidebar to pinned is sidebar is unpinned.', fakeAsync(() => {
+    cookieService.set('sidenav-state', 'unpinned');
+    sidebarService.toggle();
+    tick(500);
+    expect(cookieService.get('sidenav-state')).toBe('pinned');
+  }));
 });
