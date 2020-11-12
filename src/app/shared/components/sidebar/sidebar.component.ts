@@ -1,8 +1,9 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, inject, Inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, Inject, OnDestroy } from '@angular/core';
 import { ChangeDetectionStrategy, NgZone } from '@angular/core';
 
 import { CookieService } from 'ngx-cookie-service';
+import { timer } from 'rxjs';
 
 declare let $: any;
 
@@ -12,8 +13,8 @@ declare let $: any;
   styleUrls: ['./sidebar.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarComponent implements OnInit, AfterViewInit {
-  @ViewChild('sidebar', { read: ElementRef }) sidebar: ElementRef;
+export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('sidenav', { read: ElementRef }) sidenav: ElementRef;
   @ViewChild('scrollbar', { read: ElementRef }) scrollbar: ElementRef;
   @ViewChild('sidenavToggler', { read: ElementRef }) sidenavToggler: ElementRef;
 
@@ -35,16 +36,20 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     });
   }
   
-
   sidenavToggle(): void {
     if(this.sidenavState() == 'pinned') this.unpinSidenav()
     else this.pinSidenav();
   }
 
+  ngOnDestroy() {
+    this.removeSidenavMargin();
+  }
+
   protected sidenavSetup(): void {
     let sidenavState = this.sidenavState() ? this.sidenavState() : 'pinned';
 
-    if ($(window).width() > 1200) {
+    /* istanbul ignore else */
+    if ($(window).width() >= 1200) {
         if (sidenavState == 'pinned') this.pinSidenav()
         else this.unpinSidenav();
     }
@@ -57,6 +62,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     $(this.sidenavToggler.nativeElement).addClass('active');
     $(this._document.body).removeClass('g-sidenav-hidden').addClass('g-sidenav-show g-sidenav-pinned');
     this._cookieService.set('sidenav-state', 'pinned');
+    /* istanbul ignore else */
     if($(window).width() >= 1200) this.assignPinnedSidenavMargin()
   }
 
@@ -65,11 +71,13 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     $(document.body).removeClass('g-sidenav-pinned').addClass('g-sidenav-hidden');
     $(document.body).find('.backdrop').remove();
     this._cookieService.set('sidenav-state', 'unpinned');
+    /* istanbul ignore else */
     if($(window).width() >= 1200) this.assignUnpinnedSidenavMargin()
   }
 
   protected sidenavMouseenter() {
-    $(this.sidebar.nativeElement).on('mouseenter', () => {
+    $(this.sidenav.nativeElement).on('mouseenter', () => {
+      /* istanbul ignore else */
       if (!$(this._document.body).hasClass('g-sidenav-pinned')) {
         $(this._document.body).removeClass('g-sidenav-hide').removeClass('g-sidenav-hidden').addClass('g-sidenav-show');
       }
@@ -77,13 +85,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   protected sidenavMouseleave() {
-    $(this.sidebar.nativeElement).on('mouseleave', () => {
+    $(this.sidenav.nativeElement).on('mouseleave', () => {
+      /* istanbul ignore else */
       if (!$(this._document.body).hasClass('g-sidenav-pinned')) {
         $(this._document.body).removeClass('g-sidenav-show').addClass('g-sidenav-hide');
-
-        setTimeout(() => {
-          $(this._document.body).removeClass('g-sidenav-hide').addClass('g-sidenav-hidden');
-        }, 300);
+        timer(300)
+          .subscribe(_ => $(this._document.body).removeClass('g-sidenav-hide').addClass('g-sidenav-hidden'));
       }
     });
   }
@@ -101,6 +108,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   protected bodyClick() {
     $(this._document.body).click(() => {
+      /* istanbul ignore else */
       if($(window).width() < 1200) this.unpinSidenav()
     });
   }

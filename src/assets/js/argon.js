@@ -59,57 +59,57 @@ var Layout = (function() {
     //     }
     // }
 
-    $("body").on("click", "[data-action]", function(e) {
+    // $("body").on("click", "[data-action]", function(e) {
 
-        e.preventDefault();
+    //     e.preventDefault();
 
-        var $this = $(this);
-        var action = $this.data('action');
-        var target = $this.data('target');
+    //     var $this = $(this);
+    //     var action = $this.data('action');
+    //     var target = $this.data('target');
 
 
-        // Manage actions
+    //     // Manage actions
 
-        switch (action) {
-            case 'sidenav-pin':
-                pinSidenav();
-                break;
+    //     switch (action) {
+    //         case 'sidenav-pin':
+    //             pinSidenav();
+    //             break;
 
-            case 'sidenav-unpin':
-                unpinSidenav();
-                break;
+    //         case 'sidenav-unpin':
+    //             unpinSidenav();
+    //             break;
 
-            case 'search-show':
-                target = $this.data('target');
-                $('body').removeClass('g-navbar-search-show').addClass('g-navbar-search-showing');
+    //         case 'search-show':
+    //             target = $this.data('target');
+    //             $('body').removeClass('g-navbar-search-show').addClass('g-navbar-search-showing');
 
-                setTimeout(function() {
-                    $('body').removeClass('g-navbar-search-showing').addClass('g-navbar-search-show');
-                }, 150);
+    //             setTimeout(function() {
+    //                 $('body').removeClass('g-navbar-search-showing').addClass('g-navbar-search-show');
+    //             }, 150);
 
-                setTimeout(function() {
-                    $('body').addClass('g-navbar-search-shown');
-                }, 300)
-                break;
+    //             setTimeout(function() {
+    //                 $('body').addClass('g-navbar-search-shown');
+    //             }, 300)
+    //             break;
 
-            case 'search-close':
-                target = $this.data('target');
-                $('body').removeClass('g-navbar-search-shown');
+    //         case 'search-close':
+    //             target = $this.data('target');
+    //             $('body').removeClass('g-navbar-search-shown');
 
-                setTimeout(function() {
-                    $('body').removeClass('g-navbar-search-show').addClass('g-navbar-search-hiding');
-                }, 150);
+    //             setTimeout(function() {
+    //                 $('body').removeClass('g-navbar-search-show').addClass('g-navbar-search-hiding');
+    //             }, 150);
 
-                setTimeout(function() {
-                    $('body').removeClass('g-navbar-search-hiding').addClass('g-navbar-search-hidden');
-                }, 300);
+    //             setTimeout(function() {
+    //                 $('body').removeClass('g-navbar-search-hiding').addClass('g-navbar-search-hidden');
+    //             }, 300);
 
-                setTimeout(function() {
-                    $('body').removeClass('g-navbar-search-hidden');
-                }, 500);
-                break;
-        }
-    })
+    //             setTimeout(function() {
+    //                 $('body').removeClass('g-navbar-search-hidden');
+    //             }, 500);
+    //             break;
+    //     }
+    // })
 
 
     // // Add sidenav modifier classes on mouse events
