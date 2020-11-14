@@ -1,0 +1,140 @@
+<ks-header name="Upload Product" class="pb-6"></ks-header>
+<div class="container mt--6">
+    <div class="row justify-content-center">
+        <div class="card col-lg-8">
+            <!-- Card header -->
+            <div class="card-header">
+                <h3 class="mb-0">Upload Product Form</h3>
+            </div>
+            <!-- Card body -->
+            <div class="card-body">
+                <form name="product" [formGroup]="form">
+                    <!-- Input groups with icon -->
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Image -->
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">
+                                    <i class="fa fa-image"></i> Image
+                                </label>
+                                <input name="image" type="file" file class="form-control-file is-invalid" formControlName="image">
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <!-- Images -->
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">
+                                    <i class="fa fa-images"></i> Images preview.
+                                </label>
+                                <input name="images" type="file" file multiple class="form-control-file" formControlName="images">
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <!-- Name -->
+                            <div class="form-group">
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-shopping-bag"></i></span>
+                                    </div>
+                                    <input name="name" class="form-control" placeholder="Name" type="text" formControlName="name">
+                                </div>
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <!-- Price -->
+                            <div class="form-group">
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-money-bill"></i></span>
+                                    </div>
+                                    <input name="price" class="form-control" placeholder="Price" type="number" formControlName="price">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><small class="font-weight-bold">RAND</small></span>
+                                    </div>
+                                </div>
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <!-- Discount -->
+                            <div class="form-group">
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="Discount" type="number" formControlName="discount">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><small class="font-weight-bold">RAND</small></span>
+                                    </div>
+                                </div>
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <!-- Category -->
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-clipboard-list"></i></span>
+                                    </div>
+                                    <select class="form-control" formControlName="category_id">
+                                        <option hidden value="" disabled selected>Category</option>
+                                    </select>
+                                </div>
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <!-- Instock -->
+                            <div class="form-group">
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-store"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="Instock" type="number" formControlName="in_stock">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <!-- Barcode -->
+                            <div class="form-group">
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-barcode"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="Barcode" type="text" formControlName="barcode">
+                                </div>
+                            </div>
+                            <div class="invalid-feedback">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <!-- Description -->
+                            <div class="form-group">
+                                <textarea name="description" class="form-control form-control-lg" rows="8" placeholder="Description..." formControlName="description"></textarea>
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary mb-2" (click)="upload()">
+                                    Upload Product
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

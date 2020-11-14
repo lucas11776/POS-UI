@@ -32,5 +32,37 @@ export const Errors = {
     },
     username: {
         required: 'The username is required.'
+    },
+    image: {
+        required: 'The image is required.',
+        max: 'The image size must not exceed 3MB.',
+        invalid: 'The image must be a type of png,jpeg,jpg.'
+    },
+    images: {
+        max: 'The is a image that exceed 3MB in images.',
+        invalid: 'The is a image that is not type of png,jpeg,jpg in images.'
+    },
+    price: {
+        required: 'The price is required.',
+        invalid: 'The price must be numeric.'
+    },
+    discount: {
+        invalid: 'The discount must be numeric.'
+    },
+    in_stock: {
+        required: 'Products instock are required.',
+        invalid: 'The instock must be a integer.'
+    },
+    barcode: {
+        invalid: 'The barcode must consist of digits only'
+    },
+    description: {
+        required: 'The description is required.',
+        max: 'The description must contain maximum of 1500 words'
+    },
+    product_name: {
+        required: 'The product name is required.',
+        min: 'The product name most contain a minimum of 5 charactors.',
+        max: 'The product name most contain maximum of 50 charactors.'
     }
 }

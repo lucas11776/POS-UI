@@ -5,13 +5,15 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
+import { FileDirective } from './directives/file.directive';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    FileDirective
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,7 @@ import { HeaderComponent } from './components/header/header.component';
     SidebarComponent,
     NavbarComponent,
     HeaderComponent,
+    FileDirective
   ]
 })
 export class SharedModule { }

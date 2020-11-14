@@ -1,0 +1,2 @@
+1. Must uninstall angular-file package if not used because the is a new directive to handle file change in reactive form.
+2. Must uninstall jquery package because we are using assets jquery in jasmine and in application.

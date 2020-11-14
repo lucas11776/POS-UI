@@ -1,10 +1,11 @@
-/* Input Group Validation */
+/* Custom form validation */
 
 .input-group.is-invalid {
     border: 1px solid var(--warning);
 }
 
-.input-group.is-invalid~.invalid-feedback {
+.input-group.is-invalid~.invalid-feedback,
+.form-control-file.is-invalid~.invalid-feedback {
     display: block;
 }
 
@@ -12,6 +13,7 @@
     border: 1px solid var(--success);
 }
 
-.input-group.is-valid~.valid-feedback {
+.input-group.is-valid~.valid-feedback,
+.form-control-file.is-valid~.valid-feedback {
     display: block;
 }
