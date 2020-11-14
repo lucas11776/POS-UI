@@ -42,6 +42,11 @@ export const Errors = {
         max: 'The is a image that exceed 3MB in images.',
         invalid: 'The is a image that is not type of png,jpeg,jpg in images.'
     },
+    name: {
+        required: 'The name is required.',
+        min: 'The name most contain a minimum of 5 charactors.',
+        max: 'The name most contain maximum of 50 charactors.'
+    },
     price: {
         required: 'The price is required.',
         invalid: 'The price must be numeric.'
@@ -59,10 +64,5 @@ export const Errors = {
     description: {
         required: 'The description is required.',
         max: 'The description must contain maximum of 1500 words'
-    },
-    product_name: {
-        required: 'The product name is required.',
-        min: 'The product name most contain a minimum of 5 charactors.',
-        max: 'The product name most contain maximum of 50 charactors.'
     }
 }

@@ -17,8 +17,10 @@
                                 <label for="exampleFormControlFile1">
                                     <i class="fa fa-image"></i> Image
                                 </label>
-                                <input name="image" type="file" file class="form-control-file is-invalid" formControlName="image">
+                                <input name="image" type="file" file class="form-control-file" formControlName="image" [ngClass]="{ 'is-invalid': form.controls.image.invalid && form.controls.image.dirty }">
                                 <div class="invalid-feedback">
+                                    <span *ngIf="form.controls.image.errors?.required">{{ formErrors.image.required }}</span>
+                                    <span *ngIf="form.controls.image.errors?.fileSize">{{ formErrors.image.max }}</span>
                                 </div>
                             </div>
                         </div>
@@ -28,8 +30,9 @@
                                 <label for="exampleFormControlFile1">
                                     <i class="fa fa-images"></i> Images preview.
                                 </label>
-                                <input name="images" type="file" file multiple class="form-control-file" formControlName="images">
+                                <input name="images" type="file" file multiple class="form-control-file" formControlName="images" [ngClass]="{ 'is-invalid': form.controls.images.invalid && form.controls.images.dirty }">
                                 <div class="invalid-feedback">
+                                    <span *ngIf="form.controls.images.errors?.fileSize">{{ formErrors.images.max }}</span>
                                 </div>
                             </div>
                         </div>
@@ -40,16 +43,19 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-shopping-bag"></i></span>
                                     </div>
-                                    <input name="name" class="form-control" placeholder="Name" type="text" formControlName="name">
+                                    <input name="name" class="form-control" placeholder="Name" type="text" formControlName="name" [ngClass]="{ 'is-invalid': form.controls.name.invalid && form.controls.name.dirty }">
                                 </div>
                                 <div class="invalid-feedback">
+                                    <span *ngIf="form.controls.name.errors?.required">{{ formErrors.name.required }}</span>
+                                    <span *ngIf="form.controls.name.errors?.minLength">{{ formErrors.name.min }}</span>
+                                    <span *ngIf="form.controls.name.errors?.maxLength">{{ formErrors.name.max }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12">
                             <!-- Price -->
                             <div class="form-group">
-                                <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge" [ngClass]="{ 'is-invalid': form.controls.price.invalid && form.controls.price.dirty }">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-money-bill"></i></span>
                                     </div>
@@ -59,13 +65,15 @@
                                     </div>
                                 </div>
                                 <div class="invalid-feedback">
+                                    <span *ngIf="form.controls.price.errors?.required">{{ formErrors.price.required }}</span>
+                                    <span *ngIf="form.controls.price.errors?.numeric">{{ formErrors.price.invalid }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12">
                             <!-- Discount -->
                             <div class="form-group">
-                                <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge" [ngClass]="{ 'is-invalid': form.controls.discount.invalid && form.controls.discount.dirty }">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
                                     </div>
@@ -75,6 +83,7 @@
                                     </div>
                                 </div>
                                 <div class="invalid-feedback">
+                                    <span *ngIf="form.controls.discount.errors?.numeric">{{ formErrors.discount.invalid }}</span>
                                 </div>
                             </div>
                         </div>
@@ -96,18 +105,22 @@
                         <div class="col-12">
                             <!-- Instock -->
                             <div class="form-group">
-                                <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge" [ngClass]="{ 'is-invalid': form.controls.discount.invalid && form.controls.discount.dirty }">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-store"></i></span>
                                     </div>
                                     <input class="form-control" placeholder="Instock" type="number" formControlName="in_stock">
+                                </div>
+                                <div class="invalid-feedback">
+                                    <span *ngIf="form.controls.in_stock.errors?.required">{{ formErrors.in_stock.required }}</span>
+                                    <span *ngIf="form.controls.in_stock.errors?.numeric">{{ formErrors.in_stock.invalid }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12">
                             <!-- Barcode -->
                             <div class="form-group">
-                                <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge" [ngClass]="{ 'is-invalid': form.controls.barcode.invalid && form.controls.barcode.dirty }">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-barcode"></i></span>
                                     </div>
@@ -115,6 +128,7 @@
                                 </div>
                             </div>
                             <div class="invalid-feedback">
+                                <span *ngIf="form.controls.barcode.errors?.numeric">{{ formErrors.barcode.invalid }}</span>
                             </div>
                         </div>
                         <div class="col-12">
