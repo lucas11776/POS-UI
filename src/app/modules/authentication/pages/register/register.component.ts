@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   register(): void {
     this.error = null;
     this._ngxSpinnerService.show();
-    this.registerSubscription = this._authenticationService.register<Token>(this.form.value)
+    this.registerSubscription = this._authenticationService.register(this.form.value)
       .subscribe(token => this.registered(token), error => this.registrationFailed(error));
   }
 

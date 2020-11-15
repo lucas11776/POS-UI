@@ -71,3 +71,17 @@
 [1113/184404.251:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1114/103645.166:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1114/133003.712:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1115/100358.596:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1115/133910.269:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\THEMBA~1\AppData\Local\Temp\karma-54017178\Crashpad\attachments\5b1948e2-f809-46f8-a384-5d61f0325c3f: The system cannot find the path specified. (0x3)
+[1115/133924.542:ERROR:http_transport_win.cc(276)] WinHttpSendRequest: The operation completed successfully. (0x0)
+[1115/140239.309:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1115/140657.875:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1115/140657.983:ERROR:exception_snapshot_win.cc(99)] thread ID 7348 not found in process
+[1115/140658.034:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1115/140658.034:ERROR:exception_snapshot_win.cc(99)] thread ID 11316 not found in process
+[1115/143511.673:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\THEMBA~1\AppData\Local\Temp\karma-13133818\Crashpad\attachments\ea2608ce-44a6-4e10-aad2-931582161f4c: The system cannot find the path specified. (0x3)
+[1115/143518.818:ERROR:http_transport_win.cc(276)] WinHttpSendRequest: The operation completed successfully. (0x0)
+[1115/144557.658:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1115/150608.223:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1115/154357.717:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1115/155656.178:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

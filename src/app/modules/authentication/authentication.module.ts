@@ -23,7 +23,7 @@ import { RegisterComponent } from './pages/register/register.component';
     RxReactiveFormsModule,
     AuthenticationRoutingModule,
     NgxSpinnerModule,
-    JwtModule.forRoot({}),
+    //JwtModule.forRoot({}),
   ]
 })
 export class AuthenticationModule { }

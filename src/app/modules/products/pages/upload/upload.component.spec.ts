@@ -1,20 +1,27 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { of, throwError } from 'rxjs';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import faker from 'faker';
 
 import { UploadComponent } from './upload.component';
 import { SharedModule } from '../../../../shared/shared.module';
-import { CreateProduct as ProductMock } from '../../../../core/mocks/product.mock';
-import { CreateProduct } from 'src/app/shared/models/product.model';
+import { CreateProduct as ProductMock, Product } from '../../../../core/mocks/product.mock';
+import { CreateProduct } from '../../../../shared/models/product.model';
 import { Errors } from '../../../../shared/errors/form.error';
+import { ProductsService } from '../../../../core/services/products.service';
 
 describe('UploadComponent', () => {
   let component: UploadComponent;
   let fixture: ComponentFixture<UploadComponent>;
   let productMock: CreateProduct;
+  let productService: ProductsService;
+  let ngxSpinnerService: NgxSpinnerService;
+  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -28,6 +35,7 @@ describe('UploadComponent', () => {
         ReactiveFormsModule,
         RxReactiveFormsModule,
         HttpClientTestingModule,
+        NgxSpinnerModule
       ]
     })
     .compileComponents();
@@ -37,7 +45,16 @@ describe('UploadComponent', () => {
     fixture = TestBed.createComponent(UploadComponent);
     component = fixture.componentInstance;
     productMock = ProductMock();
+    productService = TestBed.inject(ProductsService);
+    ngxSpinnerService = TestBed.inject(NgxSpinnerService);
+    router = TestBed.inject(Router);
     fixture.detectChanges();
+  });
+
+  beforeEach(() => {
+    spyOn(router, 'navigate').and.returnValue(new Promise((rs,rj) => rs.call(true)));
+    spyOn(ngxSpinnerService, 'show').and.returnValue(null);
+    spyOn(ngxSpinnerService, 'hide').and.returnValue(null);
   });
 
   it('should create Upload component.', () => {
@@ -123,4 +140,59 @@ describe('UploadComponent', () => {
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain(Errors.barcode.invalid);
   });
+
+  it('should check if description is required field.', () => {
+    productMock.description = null;
+    component.form.setValue(productMock);
+    component.form.controls.description.markAsDirty();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain(Errors.description.required);
+  });
+
+  it('should check if description contain words that are less then 1500.', () => {
+    productMock.description = faker.lorem.words(2000);
+    component.form.setValue(productMock);
+    component.form.controls.description.markAsDirty();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain(Errors.description.max);
+  });
+
+  it('should clear errors when upload is called', () => {
+    component.errors = { message: 'Something went wrong.' };
+    component.upload();
+    expect(component.errors).toBeNull();
+  });
+
+  it('should display spinner when making create product request.', () => {
+    component.upload();
+    expect(ngxSpinnerService.show).toHaveBeenCalled();
+  });
+
+  it('should hide spinner after product is created.', fakeAsync(() => {
+    spyOn(productService, 'create').and.returnValue(of(Product()));
+    component.upload();
+    tick();
+    expect(ngxSpinnerService.hide).toHaveBeenCalled();
+  }));
+
+  it('should navigate to uploaded product route when product is stored in database.', fakeAsync(() => {
+    spyOn(productService, 'create').and.returnValue(of(Product()));
+    component.upload();
+    tick();
+    expect(router.navigate).toHaveBeenCalled();
+  }));
+
+  it('should assign upload product error to errors is upload product fails.', fakeAsync(() => {
+    let error = { message: 'Something when wrong please try again' };
+    spyOn(productService, 'create').and.returnValue(throwError(error));
+    component.upload();
+    expect(component.errors).toEqual(error);
+  }));
+
+  it('should hide spinner when upload product fails.', fakeAsync(() => {
+    spyOn(productService, 'create').and.returnValue(throwError({}));
+    component.upload();
+    tick();
+    expect(ngxSpinnerService.hide).toHaveBeenCalled();
+  }));
 });

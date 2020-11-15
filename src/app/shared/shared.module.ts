@@ -6,6 +6,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FileDirective } from './directives/file.directive';
+import { AlertComponent } from './components/alert/alert.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { FileDirective } from './directives/file.directive';
     NavbarComponent,
     SidebarComponent,
     HeaderComponent,
-    FileDirective
+    FileDirective,
+    AlertComponent
   ],
   imports: [
     CommonModule,

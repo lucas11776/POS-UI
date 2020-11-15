@@ -1,7 +1,7 @@
 import { Image as ImageInterface } from '../../shared/models/image.model';
 import faker from 'faker';
 
-export const Image = (imageableType: string = 'App\\Image'): ImageInterface => {
+export const Image = (imageableType: string): ImageInterface => {
     return {
         id: Math.floor(Math.random() * 200),
         create_at: faker.date.recent(),

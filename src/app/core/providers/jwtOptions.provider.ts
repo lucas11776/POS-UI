@@ -6,7 +6,7 @@ import { TokenService } from '../authentication/token.service';
 export const JwtOptionsFactory = (tokenService: TokenService) => {
     return {
         tokenGetter: () => tokenService.token(),
-        allowedDomains: [ 'localhost', 'localhost:2000', 'localhost:3000', 'localhost:4200' ]
+        allowedDomains: [ 'localhost', 'localhost:2000', 'localhost:3000', 'localhost:4200', '192.168.0.147:81' ]
     };
 }
 

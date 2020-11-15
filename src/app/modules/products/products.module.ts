@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
-import { ngfModule } from 'angular-file';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './pages/products/products.component';
@@ -27,7 +27,7 @@ import { UploadComponent } from './pages/upload/upload.component';
     FormsModule,
     ReactiveFormsModule,
     RxReactiveFormsModule,
-    ngfModule,
+    NgxSpinnerModule,
   ],
   exports: [
     ProductsComponent,

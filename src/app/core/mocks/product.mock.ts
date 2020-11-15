@@ -2,7 +2,7 @@ import { CreateProduct as CreateProductInterface } from '../../shared/models/pro
 import { Product as ProductModel } from '../../shared/models/product.model';
 import { Category } from './category.mock';
 import { Image } from './image.mock';
-import { File } from './file.mock';
+import { _File } from './file.mock';
 import faker from 'faker';
 
 export const Product = (): ProductModel => {
@@ -31,8 +31,8 @@ export const CreateProduct = (): CreateProductInterface => {
     const name = faker.commerce.productName();
     const price = Math.round(Math.random() * 3500);
     return {
-        image: File('pic.png', 'image/png'),
-        images: [File('pic.png', 'image/png'), File('pic.png', 'image/png')],
+        image: _File('pic.png', 'image/png'),
+        images: [_File('pic.png', 'image/png'), _File('pic.png', 'image/png')],
         category_id: Math.floor(Math.random() * 20),
         name: name,
         price: price,

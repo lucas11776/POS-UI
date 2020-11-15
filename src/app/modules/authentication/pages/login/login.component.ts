@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   login(): void {
     this.error = null;
     this._ngxSpinnerService.show();
-    this.loginSubscription = this._authenticationService.login<Token>(this.form.value)
+    this.loginSubscription = this._authenticationService.login(this.form.value)
       .subscribe(token => this.loggedin(token), error => this.loginFailed(error));
   }
 
