@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutsModule } from './layouts/layouts.module';
 import { JwtOptionsProvider } from './core/providers/jwtOptions.provider';
+import { INTERCEPTORS } from './core/interceptors/index';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { JwtOptionsProvider } from './core/providers/jwtOptions.provider';
     LayoutsModule,
     JwtModule.forRoot({jwtOptionsProvider: JwtOptionsProvider})
   ],
-  providers: [  ],
+  providers: [ INTERCEPTORS ],
   bootstrap: [ AppComponent ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })

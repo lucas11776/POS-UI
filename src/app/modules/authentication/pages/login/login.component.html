@@ -41,6 +41,7 @@
                             Sign in
                         </button>
                     </div>
+                    <ks-alert *ngIf="error" [alert]="'danger'" [message]="error?.message" [errors]="error?.errors"></ks-alert>
                 </form>
             </div>
         </div>

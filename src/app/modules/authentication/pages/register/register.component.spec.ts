@@ -15,6 +15,7 @@ import { Errors } from '../../../../shared/errors/form.error';
 import { Register as RegisterMock, Token } from '../../../../core/mocks/authentication.mock';
 import { AuthenticationService } from '../../../../core/authentication/authentication.service';
 import { JwtOptionsProvider } from '../../../../core/providers/jwtOptions.provider';
+import {  } from '../../../../shared/shared.module';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;

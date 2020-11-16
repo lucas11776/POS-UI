@@ -25,7 +25,8 @@ import { AlertComponent } from './components/alert/alert.component';
     SidebarComponent,
     NavbarComponent,
     HeaderComponent,
-    FileDirective
+    FileDirective,
+    AlertComponent,
   ]
 })
 export class SharedModule { }

@@ -127,6 +127,9 @@
                             Create account
                         </button>
                     </div>
+                    <div class="mt-4">
+                        <ks-alert *ngIf="error" [alert]="'danger'" [message]="error?.message" [errors]="error?.errors"></ks-alert>
+                    </div>
                 </form>
             </div>
         </div>

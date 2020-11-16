@@ -67,6 +67,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   protected registrationFailed(error: Error): void {
+    console.log(error);
     this.error = error;
     this._ngxSpinnerService.hide();
   }

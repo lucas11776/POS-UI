@@ -19,7 +19,25 @@ describe('AlertComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should check if Alert component is created.', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should check if message is display in view.', () => {
+    let message = 'Something went wrong...'
+    component.message = message;
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain(message);
+  });
+
+  it('should check if errors are display in view.', () => {
+    let errors = {
+      email: 'The email is required.',
+      password: 'The password is required.'
+    };
+    component.errors = errors;
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain(errors.email);
+    expect(fixture.nativeElement.textContent).toContain(errors.password);
   });
 });

@@ -4,9 +4,9 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { JwtModule } from '@auth0/angular-jwt';
 
 import { AuthenticationRoutingModule } from './authentication-routing.module';
+import { SharedModule } from '../../shared/shared.module';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
@@ -23,7 +23,7 @@ import { RegisterComponent } from './pages/register/register.component';
     RxReactiveFormsModule,
     AuthenticationRoutingModule,
     NgxSpinnerModule,
-    //JwtModule.forRoot({}),
+    SharedModule,
   ]
 })
 export class AuthenticationModule { }

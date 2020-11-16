@@ -11,7 +11,7 @@ export class FormDataService {
     const formData = new FormData();
     for(const [name, value] of Object.entries(form))
       if(value instanceof FileList) this.fileList(formData, name, value);
-      else formData.append(name, value);
+      else if(value) formData.append(name, value);
     return formData;
   }
 
