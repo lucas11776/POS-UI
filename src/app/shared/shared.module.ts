@@ -7,6 +7,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FileDirective } from './directives/file.directive';
 import { AlertComponent } from './components/alert/alert.component';
+import { RouterBaseActiveDirective } from './directives/router-base-active.directive';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { AlertComponent } from './components/alert/alert.component';
     SidebarComponent,
     HeaderComponent,
     FileDirective,
-    AlertComponent
+    AlertComponent,
+    RouterBaseActiveDirective
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { AlertComponent } from './components/alert/alert.component';
     HeaderComponent,
     FileDirective,
     AlertComponent,
+    RouterBaseActiveDirective
   ]
 })
 export class SharedModule { }

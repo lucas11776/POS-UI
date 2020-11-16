@@ -1,10 +1,9 @@
-import { Component, Input, OnChanges, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ks-alert',
   templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./alert.component.css']
 })
 export class AlertComponent implements OnInit {
   @Input('alert') alert: string = 'success';

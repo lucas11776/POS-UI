@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    /* istanbul ignore else */
     if(this.loginSubscription) this.loginSubscription.unsubscribe();
   }
 
@@ -52,7 +53,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   protected loginFailed(error: Error): void {
-    console.log(error);
     this.error = error;
     this._ngxSpinnerService.hide();
   }

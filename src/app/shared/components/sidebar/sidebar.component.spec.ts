@@ -1,8 +1,10 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { CookieService } from 'ngx-cookie-service';
 
 import { SidebarComponent } from './sidebar.component';
-import { SidebarService } from '../../services/sidebar.service'
+import { SidebarService } from '../../services/sidebar.service';
+import { SharedModule } from '../../shared.module';
 
 declare let $: any;
 
@@ -16,6 +18,10 @@ describe('SidebarComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         SidebarComponent
+      ],
+      imports: [
+        RouterTestingModule,
+        SharedModule
       ]
     })
     .compileComponents();

@@ -7,17 +7,18 @@ import { GuestGuard } from './core/guards/guest.guard';
 import { UserGuard } from './core/guards/user.guard';
  
 const routes: Routes = [
-    {
-        path: '',
-        component: DashboardComponent,
-        loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
-        canActivate: [UserGuard]
-    },
+    
     {
         path: 'auth',
         component: AuthenticationComponent,
         loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule),
         canActivate: [GuestGuard]
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent,
+        loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
+        canActivate: [UserGuard]
     },
     {
         path: 'products',

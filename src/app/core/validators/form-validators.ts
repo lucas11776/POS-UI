@@ -8,13 +8,11 @@ export const words = (config: WordsConfig): ValidatorFn => {
         if(typeof value == 'string') {
             const numberOfWords = value.split(' ').length;
             /* istanbul ignore else */
-            if(config.minWords && numberOfWords < config.minWords) {
+            if(config.minWords && numberOfWords < config.minWords)
                 return { minWords: true };
-            }
             /* istanbul ignore else */
-            if(config.maxWords && numberOfWords > config.maxWords) {
+            if(config.maxWords && numberOfWords > config.maxWords)
                 return { maxWords: true };
-            } 
         }
         return null;
     }

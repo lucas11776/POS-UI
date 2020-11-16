@@ -10,8 +10,6 @@ import { words } from '../../../../core/validators/form-validators';
 import { Product } from '../../../../shared/models/product.model';
 import { ProductsService } from '../../../../core/services/products.service';
 
-import { CreateProduct } from '../../../../core/mocks/product.mock';
-
 @Component({
   selector: 'ks-upload',
   templateUrl: './upload.component.html',
@@ -21,7 +19,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   form: FormGroup;
   formErrors = Errors;
   uploadSubscription: Subscription;
-  errors;
+  error;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -41,11 +39,10 @@ export class UploadComponent implements OnInit, OnDestroy {
       barcode: [null, [RxwebValidators.numeric()]],
       description: [null, [RxwebValidators.required(), words({ maxWords: 1500 })]]
     });
-    this.form.setValue(CreateProduct());
   }
 
   upload(): void {
-    this.errors = null;
+    this.error = null;
     this._ngxSpinnerService.show();
     this.uploadSubscription = this._productsService.create(this.form.value)
       .subscribe(product => this.uploaded(product), error => this.uploadFalied(error));
@@ -62,7 +59,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   }
 
   protected uploadFalied(error: Error): void {
-    this.errors = error;
+    this.error = error;
     this._ngxSpinnerService.hide();
   }
 }

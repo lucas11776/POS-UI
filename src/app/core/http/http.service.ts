@@ -45,8 +45,10 @@ export class HttpService {
 
   error(httpError: HttpErrorResponse): Observable<never> {
     let error = httpError.error;
+    console.log('Http: ', httpError);
     /* istanbul ignore else */
-    if(!error) error = { message: httpError.message };
+    if(!error || error instanceof ProgressEvent)
+      error = { message: httpError.message };
     return throwError(error);
   }
 }

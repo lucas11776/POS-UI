@@ -143,10 +143,13 @@
                         </div>
                         <div class="col-12">
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary mb-2" (click)="upload()">
+                                <button type="submit" class="btn btn-primary mb-2" (click)="upload()" [disabled]="form.invalid">
                                     Upload Product
                                 </button>
                             </div>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <ks-alert *ngIf="error" alert="danger" [message]="error?.message" [errors]="error?.errors"></ks-alert>
                         </div>
                     </div>
                 </form>

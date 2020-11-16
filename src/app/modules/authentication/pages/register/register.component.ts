@@ -10,6 +10,7 @@ import { Gender } from '../../../../shared/models/gender.model';
 import { Errors } from '../../../../shared/errors/form.error';
 import { Register, Token } from '../../../../shared/models/authentication.model';
 import { TokenService } from '../../../../core/authentication/token.service';
+// import { requiredIf } from '../../../../core/validators/form-validators';
 
 @Component({
   templateUrl: './register.component.html',
@@ -67,7 +68,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   protected registrationFailed(error: Error): void {
-    console.log(error);
     this.error = error;
     this._ngxSpinnerService.hide();
   }

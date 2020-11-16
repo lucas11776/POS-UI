@@ -158,9 +158,9 @@ describe('UploadComponent', () => {
   });
 
   it('should clear errors when upload is called', () => {
-    component.errors = { message: 'Something went wrong.' };
+    component.error = { message: 'Something went wrong.' };
     component.upload();
-    expect(component.errors).toBeNull();
+    expect(component.error).toBeNull();
   });
 
   it('should display spinner when making create product request.', () => {
@@ -186,7 +186,7 @@ describe('UploadComponent', () => {
     let error = { message: 'Something when wrong please try again' };
     spyOn(productService, 'create').and.returnValue(throwError(error));
     component.upload();
-    expect(component.errors).toEqual(error);
+    expect(component.error).toEqual(error);
   }));
 
   it('should hide spinner when upload product fails.', fakeAsync(() => {

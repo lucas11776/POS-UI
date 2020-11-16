@@ -1,6 +1,6 @@
 <div class="alert alert-{{ alert }}" role="alert">
     <h4 class="alert-heading" *ngIf="message">{{ message }}</h4>
-    <hr *ngIf="message" class="m-0 mb-2">
+    <hr *ngIf="message && errorsArray" class="m-0 mb-2">
     <div *ngIf="errorsArray">
         <p class="mb-0" *ngFor="let error of errorsArray">{{ error }}</p>
     </div>
