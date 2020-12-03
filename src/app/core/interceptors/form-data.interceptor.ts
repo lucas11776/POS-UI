@@ -16,7 +16,7 @@ export class FormDataInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     /* istanbul ignore else */
-    if(request.body && request.body instanceof Object)
+    if(request.method == 'POST' && request.body instanceof Object)
       return next.handle(request.clone({ body: this._formDateService.convert(request.body) }));
     return next.handle(request);
   }

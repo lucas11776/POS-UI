@@ -39,7 +39,7 @@
                         <div class="col-12">
                             <!-- Name -->
                             <div class="form-group">
-                                <div class="input-group input-group-merge" [ngClass]="{ 'is-invalid': form.controls.name.invalid && form.controls.name.dirty }">
+                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.name.invalid && form.controls.name.dirty }">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-shopping-bag"></i></span>
                                     </div>
@@ -55,7 +55,7 @@
                         <div class="col-12">
                             <!-- Price -->
                             <div class="form-group">
-                                <div class="input-group input-group-merge" [ngClass]="{ 'is-invalid': form.controls.price.invalid && form.controls.price.dirty }">
+                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.price.invalid && form.controls.price.dirty }">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-money-bill"></i></span>
                                     </div>
@@ -73,7 +73,7 @@
                         <div class="col-12">
                             <!-- Discount -->
                             <div class="form-group">
-                                <div class="input-group input-group-merge" [ngClass]="{ 'is-invalid': form.controls.discount.invalid && form.controls.discount.dirty }">
+                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.discount.invalid && form.controls.discount.dirty }">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
                                     </div>
@@ -90,12 +90,13 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <!-- Category -->
-                                <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-clipboard-list"></i></span>
                                     </div>
-                                    <select class="form-control" formControlName="category_id">
-                                        <option hidden value="" disabled selected>Category</option>
+                                    <select name="category_id" class="form-control text-capitalize" formControlName="category_id">
+                                        <option hidden value="" disabled selected>---Categories---</option>
+                                        <option *ngFor="let category of categories() | async" [value]="category.id">{{ category.name }}</option>
                                     </select>
                                 </div>
                                 <div class="invalid-feedback">
@@ -105,7 +106,7 @@
                         <div class="col-12">
                             <!-- Instock -->
                             <div class="form-group">
-                                <div class="input-group input-group-merge" [ngClass]="{ 'is-invalid': form.controls.discount.invalid && form.controls.discount.dirty }">
+                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.discount.invalid && form.controls.discount.dirty }">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-store"></i></span>
                                     </div>
@@ -120,7 +121,7 @@
                         <div class="col-12">
                             <!-- Barcode -->
                             <div class="form-group">
-                                <div class="input-group input-group-merge" [ngClass]="{ 'is-invalid': form.controls.barcode.invalid && form.controls.barcode.dirty }">
+                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.barcode.invalid && form.controls.barcode.dirty }">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-barcode"></i></span>
                                     </div>

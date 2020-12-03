@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-9">
+        <span [ngClass]="{ 'd-none': edit }">{{ category.name }}</span>
+        <div [ngClass]="{ 'd-none': !edit }">
+            <ks-update-category [category]="category" (update)="update($event)"></ks-update-category>
+        </div>
+    </div>
+    <div class="col-3 text-right">
+        <a (click)="toggleEdit()" class="table-action" data-toggle="tooltip" data-original-title="Edit category">
+            <i class="fas fa-user-edit"></i>
+        </a>
+        <a (click)="delete()" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete category">
+            <i class="fas fa-trash"></i>
+        </a>
+    </div>
+</div>

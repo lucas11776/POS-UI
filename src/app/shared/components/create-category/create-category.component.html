@@ -1,0 +1,15 @@
+<form [formGroup]="form">
+    <div class="form-group mb-0">
+        <div class="input-group" [ngClass]="{ 'is-invalid': form.controls.name.invalid && form.controls.name.dirty }">
+            <input type="text" class="form-control" placeholder="Name" formControlName="name">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit" id="button-addon2" (click)="create()" [disabled]="form.invalid">Create</button>
+            </div>
+        </div>
+        <div class="invalid-feedback">
+            <span *ngIf="form.controls.name.errors?.required">{{ formErrors.name.required }}</span>
+            <span *ngIf="form.controls.name.errors?.minLength">{{ formErrors.name.min }}</span>
+            <span *ngIf="form.controls.name.errors?.maxLength">{{ formErrors.name.max }}</span>
+        </div>
+    </div>
+</form>

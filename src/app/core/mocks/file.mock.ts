@@ -1,5 +1,5 @@
-export const _File = (name: string, type: string, size: number = 1024): File => {
-    return new File([new ArrayBuffer(1024 * size)], name, {type: type});
+export const _File = (name: string, type: string, size: number = 1024 * 1024): File => {
+    return new File([new ArrayBuffer(size)], name, {type: type});
 }
 
 export const FileList = (files: File[]): FileList => {

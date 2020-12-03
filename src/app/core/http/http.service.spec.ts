@@ -2,8 +2,8 @@ import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { HttpService } from './http.service';
-import { of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { of, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 describe('HttpService', () => {
   let service: HttpService;
@@ -58,6 +58,20 @@ describe('HttpService', () => {
     let response = { message: 'Friut has been deleted.' };
     spyOn(httpClient, 'delete').and.returnValue(of(response));
     service.delete('fruits/apple').subscribe(r => expect(r).toBe(response));
+    tick();
+  }));
+
+  it('should get error from http client.', fakeAsync(() => {
+    const error = { message: 'Something went wrong please try again.' };
+    const thrownError = service.error(new HttpErrorResponse({ error: error }));
+    thrownError.subscribe(_=>_, err => expect(err).toEqual(error));
+    tick();
+  }));
+
+  it('should get error from message if error in failed request is not set.', fakeAsync(() => {
+    let httpErrorResponse = new HttpErrorResponse({ status: 500 });
+    const thrownError = service.error(httpErrorResponse);
+    thrownError.subscribe(_=>_, err => expect(err.message).toBe(httpErrorResponse.message));
     tick();
   }));
 });

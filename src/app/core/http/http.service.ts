@@ -9,7 +9,8 @@ import { Options } from '../../shared/models/http.model';
   providedIn: 'root'
 })
 export class HttpService {
-  static readonly HOST = 'http://192.168.0.147:81/api';
+  // static readonly HOST = 'http://192.168.0.147:81/api';
+  static readonly HOST = 'http://localhost:81/api';
 
   constructor(private _http: HttpClient) { }
 
@@ -45,7 +46,6 @@ export class HttpService {
 
   error(httpError: HttpErrorResponse): Observable<never> {
     let error = httpError.error;
-    console.log('Http: ', httpError);
     /* istanbul ignore else */
     if(!error || error instanceof ProgressEvent)
       error = { message: httpError.message };

@@ -4,7 +4,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
 
 import { JwtOptionsProvider } from './jwtOptions.provider';
-import { HttpService } from '../http/http.service';
 import { Token } from '../mocks/authentication.mock';
 import { TokenService } from '../authentication/token.service';
 import { HttpClient } from '@angular/common/http';

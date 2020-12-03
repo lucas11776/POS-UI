@@ -1,0 +1,8 @@
+<form [formGroup]="form">
+    <div class="input-group" [ngClass]="{ 'is-invalid': form.controls.name.invalid && form.controls.name.dirty }">
+        <input type="text" class="form-control" placeholder="Category name." formControlName="name">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit" id="button-addon2" (click)="update()" [disabled]="form.invalid">Update</button>
+        </div>
+    </div>
+</form>

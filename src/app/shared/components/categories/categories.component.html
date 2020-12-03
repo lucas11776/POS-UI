@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="card-header border-0">
+        <ks-create-category (create)="create($event)"></ks-create-category>
+    </div>
+    <div class="col-12 mb-4">
+        <ks-categories-list *ngFor="let category of categories" [category]="category" (delete)="delete($event)" (update)="update($event)"></ks-categories-list>
+    </div>
+</div>

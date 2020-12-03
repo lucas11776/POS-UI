@@ -24,7 +24,7 @@ import { INTERCEPTORS } from './core/interceptors/index';
     AppRoutingModule,
     ToastrModule.forRoot({}),
     LayoutsModule,
-    JwtModule.forRoot({jwtOptionsProvider: JwtOptionsProvider})
+    JwtModule.forRoot({ jwtOptionsProvider: JwtOptionsProvider })
   ],
   providers: [ INTERCEPTORS ],
   bootstrap: [ AppComponent ],

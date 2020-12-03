@@ -23,6 +23,12 @@ describe('AlertComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should convert object in to array of object values OnInit.', () => {
+    component.errors = { name: 'Name is required field.' };
+    component.ngOnInit();
+    expect(component.errorsArray).toEqual([component.errors['name']]);
+  });
+
   xit('should check if message is display in view.', () => {
     let message = 'Something went wrong...'
     component.message = message;

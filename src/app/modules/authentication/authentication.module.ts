@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -24,6 +25,7 @@ import { RegisterComponent } from './pages/register/register.component';
     AuthenticationRoutingModule,
     NgxSpinnerModule,
     SharedModule,
+    HttpClientModule,
   ]
 })
 export class AuthenticationModule { }

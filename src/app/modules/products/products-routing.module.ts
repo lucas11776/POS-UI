@@ -5,11 +5,13 @@ import { SidebarComponent } from '../../shared/components/sidebar/sidebar.compon
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component'
 import { ProductsComponent } from './pages/products/products.component';
 import { UploadComponent } from './pages/upload/upload.component';
+import { CategoryComponent } from './pages/category/category.component';
 
 const routes: Routes = [
   { path: '', component: SidebarComponent, outlet: 'sidebar' },
   { path: '', component: NavbarComponent, outlet: 'navbar' },
   { path: '', component: ProductsComponent },
+  { path: 'categories', component: CategoryComponent },
   { path: 'upload', component: UploadComponent }
 ];
 

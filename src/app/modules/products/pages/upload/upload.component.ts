@@ -3,12 +3,14 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { Errors } from '../../../../shared/errors/form.error';
 import { words } from '../../../../core/validators/form-validators';
 import { Product } from '../../../../shared/models/product.model';
 import { ProductsService } from '../../../../core/services/products.service';
+import { CategoryService } from '../../shared/category.service';
+import { Category } from '../../../../shared/models/category.model';
 
 @Component({
   selector: 'ks-upload',
@@ -16,13 +18,14 @@ import { ProductsService } from '../../../../core/services/products.service';
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit, OnDestroy {
+  error;
   form: FormGroup;
   formErrors = Errors;
   uploadSubscription: Subscription;
-  error;
 
   constructor(
     private _formBuilder: FormBuilder,
+    private _categoryService: CategoryService,
     private _ngxSpinnerService: NgxSpinnerService,
     private _productsService: ProductsService,
     private _router: Router) { }
@@ -34,11 +37,15 @@ export class UploadComponent implements OnInit, OnDestroy {
       name: [null, [RxwebValidators.required(), RxwebValidators.minLength({ value: 5 }), RxwebValidators.maxLength({ value: 50 })]],
       price: [null, [RxwebValidators.required(), RxwebValidators.numeric()]],
       discount: [null, [RxwebValidators.numeric()]],
-      category_id: [null, []],
+      category_id: ['', []],
       in_stock: [null, [RxwebValidators.required(), RxwebValidators.numeric()]],
       barcode: [null, [RxwebValidators.numeric()]],
       description: [null, [RxwebValidators.required(), words({ maxWords: 1500 })]]
     });
+  }
+
+  categories(): Observable<Category[]> {
+    return this._categoryService.categories$;
   }
 
   upload(): void {

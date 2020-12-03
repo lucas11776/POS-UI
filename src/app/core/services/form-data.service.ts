@@ -10,6 +10,7 @@ export class FormDataService {
   convert(form: Object): FormData {
     const formData = new FormData();
     for(const [name, value] of Object.entries(form))
+      /* istanbul ignore else */
       if(value instanceof FileList) this.fileList(formData, name, value);
       else if(value) formData.append(name, value);
     return formData;
