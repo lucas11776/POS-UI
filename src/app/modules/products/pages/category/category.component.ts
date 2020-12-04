@@ -5,7 +5,8 @@ import { SubSink } from 'subsink';
 
 import { CategoryService } from '../../shared/category.service';
 import { Category, CreateCategory, UpdateCategory } from '../../../../shared/models/category.model';
-import { Error } from '../../../../shared/models/Error.model';
+import { Error } from '../../../../shared/models/api.model';
+import { EventBusService } from '../../../../core/services/event-bus.service';
 
 @Component({
   templateUrl: './category.component.html',
@@ -18,7 +19,8 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   constructor(
     private _categoryService: CategoryService,
-    private _ngxSpinnerService: NgxSpinnerService) { }
+    private _ngxSpinnerService: NgxSpinnerService,
+    private _eventBus: EventBusService) { }
 
   ngOnInit(): void {
     this.categories$ = this._categoryService.categories$;
@@ -53,6 +55,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
   }
 
   protected createSuccess(category: Category): void {
+    this._eventBus.emit({ name: 'CATEGORY_CREATED' });
     this._ngxSpinnerService.hide();
   }
 

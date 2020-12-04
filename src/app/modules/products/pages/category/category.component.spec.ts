@@ -10,6 +10,7 @@ import { CategoryService } from '../../shared/category.service';
 import { Category } from '../../../../shared/models/category.model';
 import { CreateCategory, Category as CategoryMock, UpdateCategory } from '../../../../core/mocks/category.mock';
 import { HttpService } from '../../../../core/http/http.service';
+import { EventBusService } from '../../../../core/services/event-bus.service';
 
 describe('CategoryComponent', () => {
   let component: CategoryComponent;
@@ -18,6 +19,7 @@ describe('CategoryComponent', () => {
   let httpService: HttpService;
   let category: Category;
   let ngxSpinnerService: NgxSpinnerService;
+  let eventBusService: EventBusService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -40,6 +42,7 @@ describe('CategoryComponent', () => {
     httpService = TestBed.inject(HttpService);
     categoryService = TestBed.inject(CategoryService);
     ngxSpinnerService = TestBed.inject(NgxSpinnerService);
+    eventBusService = TestBed.inject(EventBusService);
     category = CategoryMock();
     fixture.detectChanges();
   });
@@ -74,6 +77,14 @@ describe('CategoryComponent', () => {
     component.create(CreateCategory());
     tick();
     expect(ngxSpinnerService.hide).toHaveBeenCalled();
+  }));
+
+  it('should emit a category created event when create request is complete.', fakeAsync(() => {
+    spyOn(categoryService, 'create').and.returnValue(of(category));
+    spyOn(eventBusService, 'emit').and.returnValue();
+    component.create(CreateCategory());
+    tick();
+    expect(eventBusService.emit).toHaveBeenCalled();
   }));
 
   it('should hide spinner when create category request failed.', fakeAsync(() => {

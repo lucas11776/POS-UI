@@ -17,3 +17,10 @@
 .form-control-file.is-valid~.valid-feedback {
     display: block;
 }
+
+
+/* Pointer */
+
+.pointer {
+    cursor: pointer;
+}

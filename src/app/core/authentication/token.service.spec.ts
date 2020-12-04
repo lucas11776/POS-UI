@@ -43,4 +43,10 @@ describe('TokenService', () => {
     service.store(token);
     expect(service.get()).toBe(`${token.type} ${token.token}`);
   });
+
+  it('should remove token from cookies if delete is called.', () => {
+    service.store(token);
+    service.delete();
+    expect(service.get()).toBe('');
+  });
 });

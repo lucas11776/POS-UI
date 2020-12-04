@@ -27,4 +27,8 @@ export class AuthenticationService {
   login(crediatials: Login): Observable<Token> {
     return this._http.post<Token>('auth/login', crediatials);
   }
+
+  logout(): Observable<any> {
+    return this._http.post('auth/logout', {});
+  }
 }

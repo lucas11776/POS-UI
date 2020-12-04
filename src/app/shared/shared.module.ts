@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -15,6 +16,8 @@ import { CreateCategoryComponent } from './components/create-category/create-cat
 import { CategoriesListComponent } from './components/categories-list/categories-list.component';
 import { CategoriesListElementComponent } from './components/categories-list-element/categories-list-element.component';
 import { UpdateCategoryComponent } from './components/update-category/update-category.component';
+import { LogoutModalComponent } from './components/logout-modal/logout-modal.component';
+import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { UpdateCategoryComponent } from './components/update-category/update-cat
     CategoriesListComponent,
     CategoriesListElementComponent,
     UpdateCategoryComponent,
+    LogoutModalComponent,
+    ConfirmationModalComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +41,7 @@ import { UpdateCategoryComponent } from './components/update-category/update-cat
     FormsModule,
     ReactiveFormsModule,
     RxReactiveFormsModule,
+    NgbModalModule,
   ],
   exports: [
     SidebarComponent,
@@ -46,6 +52,8 @@ import { UpdateCategoryComponent } from './components/update-category/update-cat
     RouterBaseActiveDirective,
     CategoriesComponent,
     CreateCategoryComponent,
+    LogoutModalComponent,
+    ConfirmationModalComponent,
   ]
 })
 export class SharedModule { }

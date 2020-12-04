@@ -1,4 +1,5 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { EventEmitter } from '@angular/core';
 
 import { CategoriesListElementComponent } from './categories-list-element.component';
 import { Category as CategoryMock } from '../../../core/mocks/category.mock';
@@ -56,6 +57,8 @@ describe('CategoriesListElementComponent', () => {
     let categoryId = null;
     component.deleteEvent.subscribe(id => categoryId = id);
     component.delete();
+    component.confirmationModalComponent.confirmation.emit(true);
+    tick();
     expect(categoryId).toBe(category.id);
   }));
 });

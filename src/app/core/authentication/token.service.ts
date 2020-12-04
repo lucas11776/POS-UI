@@ -13,7 +13,9 @@ export class TokenService {
   constructor(private _cookieService: CookieService) { }
 
   get(): string {
-    return `${this._cookieService.get(this.type_name)} ${this.token()}`;
+    if(this._cookieService.get(this.type_name) && this.token())
+      return `${this._cookieService.get(this.type_name)} ${this.token()}`;
+    return ``;
   }
 
   token(): string {
@@ -26,6 +28,11 @@ export class TokenService {
     let token_expires = this.date(token.expires);
     this._cookieService.set(this.token_name, access_token, token_expires);
     this._cookieService.set(this.type_name, token_type, token_expires);
+  }
+
+  delete(): void {
+    this._cookieService.delete(this.token_name);
+    this._cookieService.delete(this.type_name);
   }
 
   private date(seconds: number): Date {

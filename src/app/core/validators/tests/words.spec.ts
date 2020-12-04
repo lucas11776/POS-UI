@@ -20,15 +20,15 @@ describe('WordsValidator', () => {
         formBuilder = TestBed.inject(FormBuilder);
     });
 
-    it('should exceede form validator number of words.', () => {
+    it('should be less then number of required words.', () => {
         formGroup = formBuilder.group({ description: [null, [ Words({ minWords: 10 }) ]] });
         formGroup.setValue({ description: faker.random.words(5) });
         expect(formGroup.controls.description.errors).toEqual({ minWords: true });
     });
 
-    it('should exceede form validator number of words.', () => {
+    it('should be greater then number of required words.', () => {
         formGroup = formBuilder.group({ description: [null, [ Words({ maxWords: 10 }) ]] });
-        formGroup.setValue({ description: faker.random.words(11) });
+        formGroup.setValue({ description: faker.random.words(15) });
         expect(formGroup.controls.description.errors).toEqual({ maxWords: true });
     });
 });

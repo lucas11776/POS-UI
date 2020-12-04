@@ -25,14 +25,14 @@ describe('FormDataInterceptor', () => {
   });
 
   it('should check if object if converted to FormData object.', fakeAsync(() => {
-    httpClient.patch('user', {}).subscribe();
+    httpClient.post('user', {}).subscribe();
     const request = httpMock.expectOne('user').request;
     expect(request.body).toBeInstanceOf(FormData);
   }));
 
   it('should check if form data contain object key:value pair.', fakeAsync(() => {
     const form = { name: 'Joe' };
-    httpClient.patch('user', form).subscribe();
+    httpClient.post('user', form).subscribe();
     const request = httpMock.expectOne('user').request;
     expect(request.body.get('name')).toBe(form.name);
   }));
