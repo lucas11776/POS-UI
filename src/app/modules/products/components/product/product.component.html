@@ -5,7 +5,7 @@
     <figcaption class="info-wrap">
         <div class="row">
             <div class="col-md-12">
-                <a href="#" class="title" data-abc="true">SkullCandy Earphones</a>
+                <a href="#" class="title" data-abc="true">{{ product?.name }}</a>
             </div>
         </div>
     </figcaption>
@@ -19,10 +19,10 @@
             </a>
         </div>
         <div class="price-wrap">
-            <span class="price discount h2">R900</span>
-            <span class="price h2">R600</span>
+            <span class="price discount h2" *ngIf="product?.discount">R{{ product?.discount }}</span>
+            <span class="price h2">R{{ product?.price }}</span>
             <br>
-            <small class="text-success">Instock: 5</small>
+            <small class="text-success">Instock: {{ product?.in_stock }}</small>
         </div>
     </div>
 </figure>

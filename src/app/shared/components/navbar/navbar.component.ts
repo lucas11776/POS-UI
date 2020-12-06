@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SidebarService } from '../../services/sidebar.service';
@@ -9,20 +9,16 @@ import { LogoutModalComponent } from '../logout-modal/logout-modal.component';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
-
+export class NavbarComponent {
   constructor(
     private _sidebarService: SidebarService,
     private _ngModal: NgbModal) { }
-
-  ngOnInit(): void {
-  }
 
   toggleSidebar(): void {
     this._sidebarService.toggle();
   }
 
-  logout() {
-    let modal = this._ngModal.open(LogoutModalComponent);
+  logout(): void {
+    this._ngModal.open(LogoutModalComponent);
   }
 }

@@ -1,5 +1,6 @@
 import { Image } from './image.model';
 import { Category } from './category.model';
+import { Paginator } from './pagination.model';
 
 export interface UpdateProduct {
     category_id: number | null;
@@ -25,4 +26,8 @@ export interface Product extends UpdateProduct {
     category: Category | null;
     image: Image;
     images: Image[] | null;
+}
+
+export interface ProductsPagination extends Paginator {
+    data: Product[];
 }

@@ -7,5 +7,6 @@ export interface Response {
 export interface Error {
     name?: string;
     message: string;
-    errors?: [{ (name: string): any }]
-  }
+    errors?: [{ (name: string): any }],
+    code?: 'NETWORK' | 'SERVER' | 'UNAUTHORIZED'
+}

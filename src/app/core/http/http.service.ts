@@ -9,8 +9,9 @@ import { Options } from '../../shared/models/http.model';
   providedIn: 'root'
 })
 export class HttpService {
-  // static readonly HOST = 'http://192.168.0.147:81/api';
   static readonly HOST = 'http://localhost:81/api';
+  static readonly NETWORK_ERROR_MESSAGE = 'No internet connection';
+  static readonly SERVER_ERROR_MESSAGE = 'Server is currently down';
 
   constructor(private _http: HttpClient) { }
 
@@ -45,10 +46,13 @@ export class HttpService {
   }
 
   error(httpError: HttpErrorResponse): Observable<never> {
-    let error = httpError.error;
-    /* istanbul ignore else */
-    if(!error || error instanceof ProgressEvent)
-      error = { message: httpError.message };
-    return throwError(error);
+    let err = httpError.error;
+    if(err instanceof ProgressEvent || !err)
+      if(!navigator.onLine) err = { message: HttpService.NETWORK_ERROR_MESSAGE, code: 'NETWORK' };
+      else err = { message: HttpService.SERVER_ERROR_MESSAGE, code: 'SERVER' };
+    else
+      err = {...err, ...{ code: httpError.status == 401 ? 'UNAUTHORIZED' : 'SERVER' }};
+    return throwError(err);
   }
+
 }

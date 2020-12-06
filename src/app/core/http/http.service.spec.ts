@@ -64,14 +64,32 @@ describe('HttpService', () => {
   it('should get error from http client.', fakeAsync(() => {
     const error = { message: 'Something went wrong please try again.' };
     const thrownError = service.error(new HttpErrorResponse({ error: error }));
-    thrownError.subscribe(_=>_, err => expect(err).toEqual(error));
+    thrownError.subscribe(_=>_, err => expect(err).toEqual({ ...error, ... { code: 'SERVER' }}));
     tick();
   }));
 
-  it('should get error from message if error in failed request is not set.', fakeAsync(() => {
+  it('should get server error message when the is no response from server.', fakeAsync(() => {
+    spyOnProperty(navigator, 'onLine').and.returnValue(true);
     let httpErrorResponse = new HttpErrorResponse({ status: 500 });
     const thrownError = service.error(httpErrorResponse);
-    thrownError.subscribe(_=>_, err => expect(err.message).toBe(httpErrorResponse.message));
+    thrownError.subscribe(_=>_, err => expect(err.message).toBe(HttpService.SERVER_ERROR_MESSAGE));
+    tick();
+  }));
+
+  it('should return network error message when the is no internet connection.', fakeAsync(() => {
+    spyOnProperty(navigator, 'onLine').and.returnValue(false);
+    let httpErrorResponse = new HttpErrorResponse({ status: 500 });
+    const thrownError = service.error(httpErrorResponse);
+    thrownError.subscribe(_=>_, err => expect(err.message).toBe(HttpService.NETWORK_ERROR_MESSAGE));
+    tick();
+  }));
+
+  it('should get unauthorized error code when user has state code of 401.', fakeAsync(() => {
+    spyOnProperty(navigator, 'onLine').and.returnValue(true);
+    const message = { message: 'Unauthorized Access.' }; 
+    let httpErrorResponse = new HttpErrorResponse({ status: 401, error: message });
+    const thrownError = service.error(httpErrorResponse);
+    thrownError.subscribe(_=>_, err => expect(err).toEqual({ ...message, ...{ code: 'UNAUTHORIZED' } }));
     tick();
   }));
 });

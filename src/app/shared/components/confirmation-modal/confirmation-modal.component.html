@@ -1,15 +1,15 @@
 <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+    <div class="modal-header" *ngIf="header">
+        <h5 class="modal-title">{{ header }}</h5>
         <button type="button" class="close" (click)="close()" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-    <div class="modal-body">
-        <p>Modal body text goes here.</p>
+    <div class="modal-body" *ngIf="message">
+        <p>{{ message }}</p>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-        <button type="button" class="btn btn-success">Confirm</button>
+        <button type="button" class="btn btn-success" (click)="confirm()">Confirm</button>
     </div>
 </div>

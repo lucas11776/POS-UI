@@ -1,0 +1,15 @@
+<ul class="pagination">
+    <li class="paginate_button page-item previous disabled" id="datatable-basic_previous">
+        <a href="#" aria-controls="datatable-basic" tabindex="0" class="page-link">
+            <i class="fas fa-angle-left"></i>
+        </a>
+    </li>
+    <li class="paginate_button page-item active" *ngFor="let _ of pages() | array; let page = index;" [ngClass]="{ active: page + 1 == active }">
+        <a (click)="paginate(page + 1)" aria-controls="datatable-basic" tabindex="0" class="page-link">{{ page + 1 }}</a>
+    </li>
+    <li class="paginate_button page-item next" id="datatable-basic_next">
+        <a href="#" aria-controls="datatable-basic" data-dt-idx="7" tabindex="0" class="page-link">
+            <i class="fas fa-angle-right"></i>
+        </a>
+    </li>
+</ul>

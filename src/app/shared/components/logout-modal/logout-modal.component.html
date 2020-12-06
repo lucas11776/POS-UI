@@ -7,9 +7,10 @@
     </div>
     <div class="modal-body">
         <p>Are you sure you want to quit this session.</p>
+        <ks-alert *ngIf="error" alert="danger" [message]="error?.message" [errors]="error?.errors"></ks-alert>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-        <button type="button" class="btn btn-danger">Logout</button>
+        <button type="button" class="btn btn-danger" (click)="logout()">Logout</button>
     </div>
 </div>

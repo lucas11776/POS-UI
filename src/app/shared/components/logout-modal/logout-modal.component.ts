@@ -43,6 +43,7 @@ export class LogoutModalComponent implements OnDestroy {
 
   protected logoutSuccess(response: Response): void {
     this._tokenService.delete();
+    this._ngbActiveModal.close();
     this._ngxSpinnerService.hide();
     this._router.navigate(['/', 'auth', 'login']);
   }

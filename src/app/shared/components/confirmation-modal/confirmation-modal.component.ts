@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 
@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class ConfirmationModalComponent {
   @Output('confirmation') confirmation = new EventEmitter<boolean>();
+  @Input('header') header: string = 'Complete action.';
+  @Input('message') message: string = 'Are you sure you want to complete this action.';
 
   constructor(public _ngbActiveModal: NgbActiveModal) { }
 

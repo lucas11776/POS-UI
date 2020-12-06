@@ -52,6 +52,7 @@ describe('LogoutModalComponent', () => {
   });
 
   beforeEach(() => {
+    spyOn(component._ngbActiveModal,'close').and.returnValue();
     spyOn(ngxSpinnerService, 'show').and.returnValue(null);
     spyOn(ngxSpinnerService, 'hide').and.returnValue(null);
     spyOn(router, 'navigate').and.returnValue(new Promise(rs => rs.call(true)));
@@ -77,7 +78,7 @@ describe('LogoutModalComponent', () => {
     expect(ngxSpinnerService.show).toHaveBeenCalled();
   });
 
-  it('should delete token from cookie when logout request is has completed.', fakeAsync(() => {
+  it('should delete token from cookie when logout request is completed.', fakeAsync(() => {
     spyOn(authenticationService, 'logout').and.returnValue(of({ message: 'You are logged out...' }));
     tokenService.store(Token());
     component.logout();
@@ -90,6 +91,13 @@ describe('LogoutModalComponent', () => {
     component.logout();
     tick();
     expect(ngxSpinnerService.hide).toHaveBeenCalled();
+  }));
+
+  it('should close modal when logout requst is complete.', fakeAsync(() => {
+    spyOn(authenticationService, 'logout').and.returnValue(of({ message: 'You are logged out...' }));
+    component.logout();
+    tick();
+    expect(component._ngbActiveModal.close).toHaveBeenCalled();
   }));
 
   it('should redirect user after logout request was successfully.', fakeAsync(() => {
@@ -115,7 +123,6 @@ describe('LogoutModalComponent', () => {
   }));
 
   it('should close modal when close is called.', () => {
-    spyOn(component._ngbActiveModal, 'close').and.returnValue();
     component.close();
     expect(component._ngbActiveModal.close).toHaveBeenCalled()
   });

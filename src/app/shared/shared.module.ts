@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -18,6 +18,10 @@ import { CategoriesListElementComponent } from './components/categories-list-ele
 import { UpdateCategoryComponent } from './components/update-category/update-category.component';
 import { LogoutModalComponent } from './components/logout-modal/logout-modal.component';
 import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
+import { DashboardSidebarComponent } from './components/dashboard-sidebar/dashboard-sidebar.component';
+import { HomeSidebarComponent } from './components/home-sidebar/home-sidebar.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { ArrayPipe } from './pipes/array.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,10 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
     UpdateCategoryComponent,
     LogoutModalComponent,
     ConfirmationModalComponent,
+    DashboardSidebarComponent,
+    HomeSidebarComponent,
+    PaginationComponent,
+    ArrayPipe,
   ],
   imports: [
     CommonModule,
@@ -41,7 +49,7 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
     FormsModule,
     ReactiveFormsModule,
     RxReactiveFormsModule,
-    NgbModalModule,
+    NgbModule,
   ],
   exports: [
     SidebarComponent,
@@ -54,6 +62,8 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
     CreateCategoryComponent,
     LogoutModalComponent,
     ConfirmationModalComponent,
+    DashboardSidebarComponent,
+    PaginationComponent,
   ]
 })
 export class SharedModule { }
