@@ -10,7 +10,6 @@ const routes: Routes = [
   { path: '', component: NavbarComponent, outlet: 'navbar' },
   { path: '', component: StatisticsComponent },
   { path: 'products', loadChildren: () => import('../products/products.module').then(m => m.ProductsModule) },
-
 ];
 
 @NgModule({

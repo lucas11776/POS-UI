@@ -26,6 +26,12 @@ const routes: Routes = [
         canActivate: [UserGuard]
     },
     {
+        path: 'pos',
+        component: DashboardComponent,
+        loadChildren: () => import('./modules/pos/pos.module').then(m => m.PosModule),
+        canActivate: [UserGuard]
+    },
+    {
         path: '**',
         redirectTo: ''
     }

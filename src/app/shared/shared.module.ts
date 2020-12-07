@@ -22,6 +22,8 @@ import { DashboardSidebarComponent } from './components/dashboard-sidebar/dashbo
 import { HomeSidebarComponent } from './components/home-sidebar/home-sidebar.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ArrayPipe } from './pipes/array.pipe';
+import { PosSidebarComponent } from './components/pos-sidebar/pos-sidebar.component';
+import { BadgesComponent } from './components/badges/badges.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { ArrayPipe } from './pipes/array.pipe';
     HomeSidebarComponent,
     PaginationComponent,
     ArrayPipe,
+    PosSidebarComponent,
+    BadgesComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +68,8 @@ import { ArrayPipe } from './pipes/array.pipe';
     ConfirmationModalComponent,
     DashboardSidebarComponent,
     PaginationComponent,
+    PosSidebarComponent,
+    ArrayPipe,
   ]
 })
 export class SharedModule { }
