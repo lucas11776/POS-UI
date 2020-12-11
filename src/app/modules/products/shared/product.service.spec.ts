@@ -28,6 +28,14 @@ describe('ProductService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should get all products from shareReplay products$ observable.', fakeAsync(() => {
+    const products = [Product(), Product()];
+    spyOn(service, 'all').and.returnValue(of(products));
+    service.products$.subscribe(p => expect(p).toEqual(products));
+    tick();
+  }));
+
+
   it('should get all products in database.', fakeAsync(() => {
     const products = [Product(), Product()];
     spyOn(httpClient, 'get').and.returnValue(of(products));

@@ -1,0 +1,331 @@
+/* Scrollbars */
+
+::-webkit-scrollbar {
+    width: 8px;
+    margin-right: 10px;
+    background: #eeeeee;
+    transition: .8 all ease-in;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 100px;
+    transition: .8 all ease-in;
+}
+
+::-webkit-progress-bar {
+    background-color: var(--primary);
+}
+
+.scrollbar {
+    overflow-y: scroll;
+}
+
+
+/* Input-group Search */
+
+.input-group.input-group-search {
+    border-radius: 80px;
+}
+
+.input-group.input-group-search .form-control {
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    border: 1px solid var(--lighter);
+    border-right: none;
+}
+
+.input-group.input-group-search .btn {
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+    border: 1px solid var(--lighter);
+    border-left: none;
+}
+
+
+/* Input-Group Counter */
+
+.btn-group.input-group-counter .btn {
+    border-width: 2px;
+}
+
+.btn-group.input-group-counter .btn:first-child {
+    margin-right: 5px;
+}
+
+.btn-group.input-group-counter .btn:first-child,
+.btn-group.input-group-counter .btn:last-child {
+    border-radius: 100%;
+}
+
+.btn-group.input-group-counter .btn:last-child {
+    margin-left: 5px;
+}
+
+
+/* POS Screen */
+
+.pos-screen {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+}
+
+
+/* POS Screen Dimensions */
+
+.pos-screen .first-window,
+.pos-screen .second-window {
+    height: 100%;
+}
+
+.pos-screen .first-window {
+    width: 68%;
+    border-right: 1px solid var(--lighter);
+}
+
+.pos-screen .second-window {
+    width: 32%;
+    border-left: 1px solid var(--lighter);
+}
+
+@media (max-width: 768px) {
+    .pos-screen .first-window,
+    .pos-screen .second-window {
+        width: 100%;
+        border: none;
+    }
+}
+
+
+/* POS Screen Menus */
+
+.pos-screen .first-window .menu,
+.pos-screen .second-window .menu {
+    border-bottom: 2px solid var(--lighter);
+    width: 100%;
+    height: 60px;
+    padding: 0;
+    margin: 0;
+}
+
+.pos-screen .first-window .menu,
+.pos-screen .second-window .menu,
+.pos-screen .first-window .navbar,
+.pos-screen .second-window .navbar {
+    height: 75px;
+}
+
+.pos-screen .first-window .navbar {
+    border-bottom: 2px solid var(--lighter);
+}
+
+@media (max-width: 768px) {
+    .pos-screen .first-window .navbar {
+        z-index: 1000;
+    }
+    .pos-screen .first-window .navbar .navbar-collapse {
+        background-color: #fff;
+        padding: 20px;
+    }
+    .pos-screen .first-window .navbar .form-inline>.input-group-search {
+        width: calc(100% - 100px);
+        margin-bottom: 10px;
+        display: flex;
+    }
+    .pos-screen .first-window .navbar .form-inline .input-group-search>.form-control {
+        border-right: 2px solid var(--lighter);
+        border-radius: 80px;
+    }
+    .pos-screen .first-window .form-inline .input-group-search .input-group-append {
+        display: none;
+    }
+    .pos-screen .first-window .navbar .form-inline .btn-navigation {
+        padding-left: 5px;
+        width: 100px;
+        position: relative;
+        bottom: 5px;
+        display: flex;
+    }
+    .pos-screen .first-window .navbar .form-inline .btn-navigation .btn {
+        width: 45px;
+        height: 45px;
+        margin: 0;
+    }
+    .pos-screen .first-window .navbar .form-inline .btn-navigation .btn .span {
+        margin: 0;
+    }
+}
+
+
+/* POS Screen Pos Screen  */
+
+.pos-screen .first-window .content,
+.pos-screen .second-window .content {
+    width: 100%;
+    height: calc(100% - 75px);
+}
+
+.pos-screen .first-window .navbar .form-inline .btn:first-child {
+    margin-right: 10px;
+}
+
+
+/* POS Screen Checkout  */
+
+.pos-screen .checkout {
+    height: 100%
+}
+
+.pos-screen .checkout .window {
+    height: 100%;
+}
+
+.pos-screen .checkout .window .header {
+    border-bottom: 2px solid var(--lighter);
+    margin-bottom: -2px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
+    margin: 0;
+}
+
+.pos-screen .checkout .window .body {
+    width: 100%;
+    height: calc(100% - 201px);
+}
+
+.pos-screen .checkout .window .list {
+    width: 100%;
+    height: 100%;
+}
+
+.pos-screen .checkout .window .list .header {
+    display: flex;
+    height: 35px;
+    line-height: 35px;
+    background-color: #ddd;
+    width: 100%;
+    padding-right: 8px;
+}
+
+.pos-screen .checkout .window .list .body {
+    height: calc(100% - 35px);
+}
+
+.pos-screen .checkout .window .list .item {
+    display: flex;
+    width: 100%;
+}
+
+.pos-screen .checkout .window .list .items {
+    width: 100%;
+    height: 100%;
+}
+
+.pos-screen .checkout .window .list .item {
+    padding-top: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--lighter);
+    float: left;
+}
+
+.pos-screen .checkout .window .list .header div:nth-child(1),
+.pos-screen .checkout .window .list .items .item div:nth-child(1) {
+    width: 35%;
+    padding-left: 2px;
+}
+
+.pos-screen .checkout .window .list .header div:nth-child(2),
+.pos-screen .checkout .window .list .items .item div:nth-child(2) {
+    width: 30%;
+    text-align: center;
+}
+
+.pos-screen .checkout .window .list .header div:nth-child(3),
+.pos-screen .checkout .window .list .items .item div:nth-child(3) {
+    width: 25%;
+    text-align: center;
+}
+
+.pos-screen .checkout .window .list .header div:nth-child(4),
+.pos-screen .checkout .window .list .items .item div:nth-child(4) {
+    width: 10%;
+    text-align: center;
+}
+
+.pos-screen .checkout .window .list .items .item div:nth-child(2) .btn-group {
+    width: 80%;
+    position: relative;
+    bottom: 2px;
+}
+
+.pos-screen .checkout .window .footer {
+    height: 151px;
+    border-top: 2px solid var(--lighter);
+    padding: 0;
+}
+
+.pos-screen .checkout .window .footer .summary {
+    width: 100%;
+    margin-top: 5px;
+    height: 100px;
+}
+
+.pos-screen .checkout .window .footer .summary .item {
+    display: flex;
+    width: 100%;
+    height: 20%;
+    padding-top: calc(2%);
+}
+
+.pos-screen .checkout .window .footer .summary .item div {
+    width: 50%;
+}
+
+.pos-screen .checkout .window .footer .summary .item div:last-child {
+    text-align: right;
+    font-weight: 600;
+}
+
+.pos-screen .checkout .window .footer .buttons .btn {
+    padding: 0px;
+    height: 45px;
+    line-height: 45px;
+    width: 100%;
+}
+
+
+/* Item */
+
+.pos-screen .card.item {
+    margin: 0;
+    margin-bottom: 0;
+}
+
+.pos-screen .card.item .card-img-top {
+    height: 120px;
+}
+
+
+/* Time */
+
+.pos-screen .time {
+    display: flex;
+    width: 100%;
+}
+
+.pos-screen .time div:first,
+.pos-screen .time div:last-child {
+    width: 50%;
+    float: left;
+}
+
+.pos-screen .time div:first {
+    width: 50%;
+}
+
+.pos-screen .time div:last-child {
+    width: 50%;
+}

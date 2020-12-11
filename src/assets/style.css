@@ -24,28 +24,3 @@
 .pointer {
     cursor: pointer;
 }
-
-
-/* Badges */
-
-.badges .badge {
-    margin-right: 6px;
-    margin-bottom: 6px;
-}
-
-.badges .badge.badge-primary.active {
-    border: 2px solid var(--primary);
-    background-color: transparent;
-}
-
-
-/* Input Group Search */
-
-.input-group.input-group-search .form-control {
-    border-radius: 80px;
-}
-
-.input-group.input-group-search .input-group-append .btn {
-    border-radius: 100%;
-    margin-left: 20px;
-}

@@ -1,0 +1,15 @@
+<div class="list text-sm">
+    <div class="header small font-weight-bolder">
+        <div>Name</div>
+        <div>QTY</div>
+        <div>Price</div>
+        <div></div>
+    </div>
+    <div class="body">
+        <div class="items scrollbar">
+            <div *ngFor="let price of [23,23,33,23,98,57,3]">
+                <ks-checkout-list-element></ks-checkout-list-element>
+            </div>
+        </div>
+    </div>
+</div>

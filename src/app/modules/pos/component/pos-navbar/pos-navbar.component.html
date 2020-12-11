@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-md">
+    <div class="navbar-brand d-md-none">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-navigation" aria-controls="navbar-navigations" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars text-primary"></span>
+        </button>
+    </div>
+    <button type="button" class="btn btn-window-toggler btn-primary btn-icon-only rounded-circle d-md-none">
+                <span class="btn-inner--icon"><i class="ni ni-ui-04"></i></span>
+            </button>
+    <div class="collapse navbar-collapse" id="navbar-navigation">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown" [routerBaseActive]="['pos/products', 'active']">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fas fa-shopping-basket"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" [routerLink]="['/', 'pos', 'products']">All</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" [routerBaseActive]="['pos/services', 'active']">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fas fa-tools"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" [routerLink]="['/', 'pos', 'services']">All</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <div class="input-group input-group-search">
+                <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append" id="button-addon4">
+                    <button type="button" class="btn btn-outline-light bg-white disabled">
+                            <span class="btn-inner--icon"><i class="fas fa-search"></i></span>
+                        </button>
+                </div>
+            </div>
+            <div class="btn-navigation">
+                <button type="button" class="btn btn-primary btn-icon-only rounded-circle">
+                        <span class="btn-inner--icon"><i class="fas fa-barcode"></i></span>
+                    </button>
+                <button type="button" class="btn btn-primary btn-icon-only rounded-circle d-md-none">
+                        <span class="btn-inner--icon"><i class="ni ni-bullet-list-67"></i></span>
+                    </button>
+            </div>
+        </form>
+    </div>
+</nav>

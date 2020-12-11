@@ -29,7 +29,7 @@ const routes: Routes = [
         path: 'pos',
         component: DashboardComponent,
         loadChildren: () => import('./modules/pos/pos.module').then(m => m.PosModule),
-        canActivate: [UserGuard]
+        canActivate: []
     },
     {
         path: '**',

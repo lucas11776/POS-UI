@@ -23,7 +23,9 @@ import { HomeSidebarComponent } from './components/home-sidebar/home-sidebar.com
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ArrayPipe } from './pipes/array.pipe';
 import { PosSidebarComponent } from './components/pos-sidebar/pos-sidebar.component';
-import { BadgesComponent } from './components/badges/badges.component';
+import { CounterComponent } from './components/counter/counter.component';
+import { ScrollbarDirective } from './directives/scrollbar.directive';
+import { CategoryBadgeGroupComponent } from './components/category-badge-group/category-badge-group.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { BadgesComponent } from './components/badges/badges.component';
     PaginationComponent,
     ArrayPipe,
     PosSidebarComponent,
-    BadgesComponent,
+    CounterComponent,
+    ScrollbarDirective,
+    CategoryBadgeGroupComponent,
   ],
   imports: [
     CommonModule,
@@ -70,6 +74,8 @@ import { BadgesComponent } from './components/badges/badges.component';
     PaginationComponent,
     PosSidebarComponent,
     ArrayPipe,
+    CounterComponent,
+    ScrollbarDirective,
   ]
 })
 export class SharedModule { }
