@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { CookieService } from 'ngx-cookie-service';
 
 import { SidebarComponent } from './sidebar.component';
-import { SidebarService } from '../../services/sidebar.service';
+import { EventBusService } from '../../../core/services/event-bus.service';
 import { SharedModule } from '../../shared.module';
 
 declare let $: any;
@@ -12,7 +12,7 @@ describe('SidebarComponent', () => {
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;
   let cookieService: CookieService;
-  let sidebarService: SidebarService;
+  let eventBuService: EventBusService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -31,7 +31,7 @@ describe('SidebarComponent', () => {
     fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;
     cookieService = TestBed.inject(CookieService);
-    sidebarService = TestBed.inject(SidebarService);
+    eventBuService = TestBed.inject(EventBusService);
     fixture.detectChanges();
   });
 
@@ -118,7 +118,7 @@ describe('SidebarComponent', () => {
 
   it('should toggle sidebar to pinned is sidebar is unpinned.', fakeAsync(() => {
     cookieService.set('sidenav-state', 'unpinned');
-    sidebarService.toggle();
+    eventBuService.emit({ name: 'SIDEBAR_TOGGLE' });
     tick(500);
     expect(cookieService.get('sidenav-state')).toBe('pinned');
   }));

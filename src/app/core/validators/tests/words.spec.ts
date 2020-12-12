@@ -21,14 +21,14 @@ describe('WordsValidator', () => {
     });
 
     it('should be less then number of required words.', () => {
-        formGroup = formBuilder.group({ description: [null, [ Words({ minWords: 10 }) ]] });
-        formGroup.setValue({ description: faker.random.words(5) });
+        formGroup = formBuilder.group({ description: [null, [ Words({ minWords: 30 }) ]] });
+        formGroup.setValue({ description: faker.random.words(10) });
         expect(formGroup.controls.description.errors).toEqual({ minWords: true });
     });
 
     it('should be greater then number of required words.', () => {
         formGroup = formBuilder.group({ description: [null, [ Words({ maxWords: 10 }) ]] });
-        formGroup.setValue({ description: faker.random.words(15) });
+        formGroup.setValue({ description: faker.random.words(30) });
         expect(formGroup.controls.description.errors).toEqual({ maxWords: true });
     });
 });

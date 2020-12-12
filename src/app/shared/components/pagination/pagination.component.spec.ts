@@ -1,5 +1,7 @@
+import { NgZone } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 import { PaginationComponent } from './pagination.component';
 import { SharedModule } from '../../shared.module';
@@ -7,6 +9,8 @@ import { SharedModule } from '../../shared.module';
 describe('PaginationComponent', () => {
   let component: PaginationComponent;
   let fixture: ComponentFixture<PaginationComponent>;
+  let router: Router;
+  let ngZone: NgZone;
   const perPage = 3; 
   const total = 10;
 
@@ -25,10 +29,16 @@ describe('PaginationComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PaginationComponent);
+    router = TestBed.inject(Router);
+    ngZone = TestBed.inject(NgZone);
     component = fixture.componentInstance;
     component.perPage = perPage;
     component.total = total;
     fixture.detectChanges();
+  });
+
+  beforeEach(() => {
+    // spyOn(router, 'navigate').and.returnValue(new Promise(r => r.call(true)));
   });
 
   it('should check if Pagination component is created.', () => {
@@ -49,7 +59,7 @@ describe('PaginationComponent', () => {
 
   it('should emit page number when paginate is called after 500ms.', fakeAsync(() => {
     component.pagination.subscribe(page => expect(page).toBe(1));
-    component.paginate(1);
+    ngZone.run(_ => component.paginate(1));
     tick(500);
   }));
 });

@@ -8,7 +8,9 @@ describe('AlertComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlertComponent ]
+      declarations: [
+        AlertComponent
+      ]
     })
     .compileComponents();
   }));
@@ -29,20 +31,17 @@ describe('AlertComponent', () => {
     expect(component.errorsArray).toEqual([component.errors['name']]);
   });
 
-  xit('should check if message is display in view.', () => {
+  it('should check if message is display in view.', () => {
     let message = 'Something went wrong...'
     component.message = message;
     fixture.detectChanges();
-    console.log(fixture.nativeElement.textContent);
     expect(fixture.nativeElement.textContent).toContain(message);
   });
 
-  xit('should check if errors are display in view.', () => {
-    let errors = {
-      email: 'The email is required.',
-      password: 'The password is required.'
-    };
+  it('should check if errors are display in view.', () => {
+    let errors = { email: 'The email is required.', password: 'The password is required.' };
     component.errors = errors;
+    component.ngOnInit();
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain(errors.email);
     expect(fixture.nativeElement.textContent).toContain(errors.password);

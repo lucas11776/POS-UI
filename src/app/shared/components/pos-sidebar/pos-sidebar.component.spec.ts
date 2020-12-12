@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PosSidebarComponent } from './pos-sidebar.component';
+import { SharedModule } from '../../shared.module';
 
 describe('PosSidebarComponent', () => {
   let component: PosSidebarComponent;
@@ -8,7 +9,12 @@ describe('PosSidebarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PosSidebarComponent ]
+      declarations: [
+        PosSidebarComponent
+      ],
+      imports: [
+        SharedModule,
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +25,7 @@ describe('PosSidebarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should check if PosSidebar is created.', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -35,6 +35,12 @@ import { CheckoutListElementComponent } from './component/checkout-list-element/
     LayoutsModule,
   ],
   exports: [
+    CheckoutComponent,
+    CheckoutListComponent,
+    ItemComponent,
+    CheckoutSummaryComponent,
+    CheckoutSummaryComponent,
+    CheckoutButtonsComponent,
   ]
 })
 export class PosModule { }

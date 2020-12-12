@@ -13,9 +13,7 @@ describe('FormDataInterceptor', () => {
       HttpClientTestingModule
     ],
     providers: [
-      {
-        provide: HTTP_INTERCEPTORS, useClass: FormDataInterceptor, multi: true
-      }
+      { provide: HTTP_INTERCEPTORS, useClass: FormDataInterceptor, multi: true }
       ]
   }));
 
@@ -39,6 +37,7 @@ describe('FormDataInterceptor', () => {
 
   it('should make request with empty body.', fakeAsync(() => {
     httpClient.get('user').subscribe();
-    httpMock.expectOne('user');
+    const request = httpMock.expectOne('user');
+    expect(request.request.body).toBeNull();
   }));
 });

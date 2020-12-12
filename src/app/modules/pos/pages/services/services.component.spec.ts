@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ServicesComponent } from './services.component';
+import { PosModule } from '../../pos.module';
 
 describe('ServicesComponent', () => {
   let component: ServicesComponent;
@@ -8,7 +9,12 @@ describe('ServicesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ServicesComponent ]
+      declarations: [
+        ServicesComponent
+      ],
+      imports: [
+        PosModule,
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +25,7 @@ describe('ServicesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should check if Services component is created.', () => {
     expect(component).toBeTruthy();
   });
 });

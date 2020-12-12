@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductsComponent } from './products.component';
+import { PosModule } from '../../pos.module';
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
@@ -8,7 +9,12 @@ describe('ProductsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductsComponent ]
+      declarations: [
+        ProductsComponent
+      ],
+      imports: [
+        PosModule,
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +25,7 @@ describe('ProductsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should check if Products component is created.', () => {
     expect(component).toBeTruthy();
   });
 });

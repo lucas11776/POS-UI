@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CheckoutListComponent } from './checkout-list.component';
+import { PosModule } from '../../pos.module';
 
 describe('CheckoutListComponent', () => {
   let component: CheckoutListComponent;
@@ -8,7 +9,12 @@ describe('CheckoutListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CheckoutListComponent ]
+      declarations: [
+        CheckoutListComponent
+      ],
+      imports: [
+        PosModule,
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +25,7 @@ describe('CheckoutListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should check if CheckoutList component is created.', () => {
     expect(component).toBeTruthy();
   });
 });

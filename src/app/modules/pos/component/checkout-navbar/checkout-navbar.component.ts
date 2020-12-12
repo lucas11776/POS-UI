@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { EventBusService } from '../../../../core/services/event-bus.service';
+
 @Component({
   selector: 'ks-checkout-navbar',
   templateUrl: './checkout-navbar.component.html',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckoutNavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _eventBusService: EventBusService) { }
 
   ngOnInit(): void {
   }
 
+  toggleSidebar(): void {
+    this._eventBusService.emit({ name: 'SIDEBAR_TOGGLE' });
+  }
 }

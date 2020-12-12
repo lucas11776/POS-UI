@@ -4,11 +4,12 @@ import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { NavbarComponent } from './navbar.component';
 import { SidebarService } from '../../services/sidebar.service';
+import { EventBusService } from '../../../core/services/event-bus.service';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
-  let sidebarService: SidebarService;
+  let eventBusService: EventBusService;
   let ngbMadal: NgbModal;
 
   beforeEach(async(() => {
@@ -27,14 +28,14 @@ describe('NavbarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
-    sidebarService = TestBed.inject(SidebarService);
+    eventBusService = TestBed.inject(EventBusService);
     ngbMadal = TestBed.inject(NgbModal);
     fixture.detectChanges();
   });
 
   it('should toggle sidebar when toggleSidebar is called.', fakeAsync(() => {
     let isToggled = false;
-    sidebarService.togglerObservable.subscribe(_ => isToggled = true);
+    eventBusService.event.subscribe(_ => isToggled = true);
     component.toggleSidebar();
     tick(500);
     expect(isToggled).toBeTrue();

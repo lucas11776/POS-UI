@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { SidebarService } from '../../services/sidebar.service';
+import { EventBusService } from '../../../core/services/event-bus.service';
 import { LogoutModalComponent } from '../logout-modal/logout-modal.component';
 
 @Component({
@@ -11,11 +11,11 @@ import { LogoutModalComponent } from '../logout-modal/logout-modal.component';
 })
 export class NavbarComponent {
   constructor(
-    private _sidebarService: SidebarService,
+    private _eventBusService: EventBusService,
     private _ngModal: NgbModal) { }
 
   toggleSidebar(): void {
-    this._sidebarService.toggle();
+    this._eventBusService.emit({ name: 'SIDEBAR_TOGGLE' });
   }
 
   logout(): void {

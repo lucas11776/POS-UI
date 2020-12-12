@@ -1,10 +1,12 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, Inject, OnDestroy } from '@angular/core';
 import { ChangeDetectionStrategy, NgZone } from '@angular/core';
-import { Subscription, timer } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+import { timer } from 'rxjs';
+import { SubSink } from 'subsink';
 
 import { CookieService } from 'ngx-cookie-service';
-import { SidebarService } from '../../services/sidebar.service';
+import { EventBusService } from '../../../core/services/event-bus.service';
 
 declare let $: any;
 
@@ -18,17 +20,19 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('sidenav', { read: ElementRef }) sidenav: ElementRef;
   @ViewChild('scrollbar', { read: ElementRef }) scrollbar: ElementRef;
   @ViewChild('sidenavToggler', { read: ElementRef }) sidenavToggler: ElementRef;
-  sidebarSubscription: Subscription;
+  sub = new SubSink;
 
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private _ngZone: NgZone,
     private _cookieService: CookieService,
-    private _sidebarService: SidebarService) { }
+    private _eventBusService: EventBusService) { }
 
   ngOnInit(): void {
-    this.sidebarSubscription = this._sidebarService.togglerObservable
-      .subscribe(_ => this.sidenavToggle());
+    this.sub.sink = this._eventBusService.event.pipe(
+      map(e => e.name == 'SIDEBAR_TOGGLE'),
+      debounceTime(500))
+      .subscribe(_ => this.sidenavToggle())
   }
 
   ngAfterViewInit(): void {
@@ -48,8 +52,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.removeSidenavMargin();
-    /* istanbul ignore else */
-    if(this.sidebarSubscription) this.sidebarSubscription.unsubscribe();
+    this.sub.unsubscribe();
   }
 
   protected sidenavSetup(): void {
@@ -66,20 +69,26 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   protected pinSidenav(): void {
+    this._cookieService.set('sidenav-state', 'pinned');
     $(this.sidenavToggler.nativeElement).addClass('active');
     $(this._document.body).removeClass('g-sidenav-hidden').addClass('g-sidenav-show g-sidenav-pinned');
-    this._cookieService.set('sidenav-state', 'pinned');
+    /* istanbul ignore else */
+    if(!$(this.sidenav.nativeElement).is(':hover'))
+      $(this._document.body).removeClass('g-sidenav-hide').removeClass('g-sidenav-hidden').addClass('g-sidenav-show');
     /* istanbul ignore else */
     if($(window).width() >= 1200) this.assignPinnedSidenavMargin()
   }
 
   protected unpinSidenav(): void {
-    $(this.sidenavToggler.nativeElement).removeClass('active');
-    $(this._document.body).removeClass('g-sidenav-pinned').addClass('g-sidenav-hidden');
     $(this._document.body).find('.backdrop').remove();
     this._cookieService.set('sidenav-state', 'unpinned');
+    $(this.sidenavToggler.nativeElement).removeClass('active');
+    $(this._document.body).removeClass('g-sidenav-pinned').addClass('g-sidenav-hidden');
+     /* istanbul ignore else */
+    if(!$(this.sidenav.nativeElement).is(':hover'))
+      $(this._document.body).removeClass('g-sidenav-show').addClass('g-sidenav-hide');
     /* istanbul ignore else */
-    if($(window).width() >= 1200) this.assignUnpinnedSidenavMargin()
+    if($(window).width() >= 1200) this.assignUnpinnedSidenavMargin();
   }
 
   protected sidenavMouseenter() {
@@ -96,7 +105,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
       /* istanbul ignore else */
       if (!$(this._document.body).hasClass('g-sidenav-pinned')) {
         $(this._document.body).removeClass('g-sidenav-show').addClass('g-sidenav-hide');
-        timer(300)
+        this.sub.sink = timer(300)
           .subscribe(_ => $(this._document.body).removeClass('g-sidenav-hide').addClass('g-sidenav-hidden'));
       }
     });
@@ -104,22 +113,20 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   protected screenResize() {
     $(window).resize(() => {
-      if($(window).width() >= 1200) {
+      if($(window).width() >= 1200)
         if(this.sidenavState() == 'pinned') this.assignPinnedSidenavMargin();
         else this.assignUnpinnedSidenavMargin();
-      } else {
+      else
         this.removeSidenavMargin();
-      }
     });
   }
 
   protected bodyClick() {
     $(this._document.body).click((e: Event) => {
       /* istanbul ignore else */
-      if($(e.target).is('body')) { 
+      if($(e.target).is('body'))
         /* istanbul ignore else */
         if($(window).width() < 1200) this.unpinSidenav()
-      }
     });
   }
 

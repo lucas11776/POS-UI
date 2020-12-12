@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 export interface Event {
-  name: 'CATEGORY_CREATED',
+  name: 'CATEGORY_CREATED' | 'SIDEBAR_TOGGLE',
   payload?: any;
 }
 

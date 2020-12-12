@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { PosComponent } from './pos.component';
 
@@ -8,7 +9,12 @@ describe('PosComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PosComponent ]
+      declarations: [
+        PosComponent,
+      ],
+      imports: [
+        RouterTestingModule,
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +25,7 @@ describe('PosComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should check if Pos component is created.', () => {
     expect(component).toBeTruthy();
   });
 });
