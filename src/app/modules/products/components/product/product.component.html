@@ -19,8 +19,11 @@
             </a>
         </div>
         <div class="price-wrap">
-            <span class="price discount h2" *ngIf="product?.discount">R{{ product?.discount }}</span>
-            <span class="price h2">R{{ product?.price }}</span>
+            <span class="h3" *ngIf="product?.discount">
+                R{{ product?.discount | toFixed:2 }}
+                <sup><span class="price discount small" *ngIf="product?.discount">R{{ product?.price | toFixed:2 }}</span></sup>
+            </span>
+            <span class="price h3" *ngIf="!product?.discount">R{{ product?.price | toFixed:2 }}</span>
             <br>
             <small class="text-success">Instock: {{ product?.in_stock }}</small>
         </div>

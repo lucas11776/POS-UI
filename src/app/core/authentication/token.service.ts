@@ -26,8 +26,8 @@ export class TokenService {
     let access_token = token.token;
     let token_type = token.type;
     let token_expires = this.date(token.expires);
-    this._cookieService.set(this.token_name, access_token, token_expires);
-    this._cookieService.set(this.type_name, token_type, token_expires);
+    this._cookieService.set(this.token_name, access_token, token_expires, '/');
+    this._cookieService.set(this.type_name, token_type, token_expires, '/');
   }
 
   delete(): void {

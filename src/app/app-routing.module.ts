@@ -11,25 +11,30 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent,
         loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
-        // canActivate: [UserGuard]
+        canActivate: [UserGuard]
     },
     {
         path: 'auth',
         component: AuthenticationComponent,
         loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule),
-        // canActivate: [GuestGuard]
+        canActivate: [GuestGuard]
     },
     {
         path: 'dashboard',
         component: DashboardComponent,
         loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
-        // canActivate: [UserGuard]
+        canActivate: [UserGuard]
     },
     {
         path: 'pos',
         component: DashboardComponent,
         loadChildren: () => import('./modules/pos/pos.module').then(m => m.PosModule),
-        // canActivate: [UserGuard]
+        canActivate: [UserGuard]
+    },
+    {
+        path: 'profile',
+        component: DashboardComponent,
+        loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)
     },
     {
         path: '**',
