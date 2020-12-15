@@ -6,7 +6,7 @@ import { of, throwError } from 'rxjs';
 
 import { CategoryComponent } from './category.component';
 import { SharedModule } from '../../../../shared/shared.module';
-import { CategoryService } from '../../shared/category.service';
+import { CategoriesService } from '../../shared/categories.service';
 import { Category } from '../../../../shared/models/category.model';
 import { CreateCategory, Category as CategoryMock, UpdateCategory } from '../../../../core/mocks/category.mock';
 import { HttpService } from '../../../../core/http/http.service';
@@ -15,7 +15,7 @@ import { EventBusService } from '../../../../core/services/event-bus.service';
 describe('CategoryComponent', () => {
   let component: CategoryComponent;
   let fixture: ComponentFixture<CategoryComponent>;
-  let categoryService: CategoryService;
+  let categoryService: CategoriesService;
   let httpService: HttpService;
   let category: Category;
   let ngxSpinnerService: NgxSpinnerService;
@@ -40,7 +40,7 @@ describe('CategoryComponent', () => {
     fixture = TestBed.createComponent(CategoryComponent);
     component = fixture.componentInstance;
     httpService = TestBed.inject(HttpService);
-    categoryService = TestBed.inject(CategoryService);
+    categoryService = TestBed.inject(CategoriesService);
     ngxSpinnerService = TestBed.inject(NgxSpinnerService);
     eventBusService = TestBed.inject(EventBusService);
     category = CategoryMock();

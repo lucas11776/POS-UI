@@ -3,7 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SubSink } from 'subsink';
 
 import { ProductsPagination } from '../../../../shared/models/product.model';
-import { ProductService } from '../../shared/product.service';
+import { ProductsService } from '../../shared/products.service';
 import { Error } from '../../../../shared/models/api.model';
 
 @Component({
@@ -16,7 +16,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   error: Error;
 
   constructor(
-    private _productService: ProductService,
+    private _productsService: ProductsService,
     private _ngxSpinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   protected getProducts(): void {
     this.error = null;
     this._ngxSpinnerService.show();
-    this.sub.sink = this._productService.get()
+    this.sub.sink = this._productsService.get()
       .subscribe(
         products => this.productsSuccess(products),
         error => this.productsFailed(error));

@@ -1,0 +1,22 @@
+<input type="file" [multiple]="multiple" hidden #input file [multiple]="multiple" [formControl]="control" (change)="setValue($event.target.files)">
+<div class="dropzone dropzone-multiple" (click)="inputClick()" *ngIf="dataTransfer.files.length == 0">
+    <div class="dz-message" [ngClass]="{ 'error': error }"><span>{{ title }}</span></div>
+</div>
+<div class="col p-3 dz-message" [ngClass]="{ 'error': error }" *ngIf="dataTransfer.files.length != 0">
+    <div class="row">
+        <div class="col-6 text-left pt-1 mb-3">
+            <span>Files</span>
+        </div>
+        <div class="col-6 text-right">
+            <button class="btn btn-secondary btn-sm rounded-circle m-0" (click)="reset()"><span class="fas fa-trash"></span></button>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let file of dataTransfer.files; let i = index;">
+                    <ks-uploaded-file [file]="file" (delete)="delete(i)"></ks-uploaded-file>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-content></ng-content>

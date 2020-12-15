@@ -4,8 +4,13 @@
     border: 1px solid var(--warning);
 }
 
+.dz-message.error {
+    border-color: var(--warning);
+}
+
 .input-group.is-invalid~.invalid-feedback,
-.form-control-file.is-invalid~.invalid-feedback {
+.form-control-file.is-invalid~.invalid-feedback,
+.dz-message.error~.invalid-feedback {
     display: block;
 }
 
@@ -14,7 +19,8 @@
 }
 
 .input-group.is-valid~.valid-feedback,
-.form-control-file.is-valid~.valid-feedback {
+.form-control-file.is-valid~.valid-feedback,
+.dz-message.error~.success {
     display: block;
 }
 

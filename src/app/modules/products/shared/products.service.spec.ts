@@ -3,12 +3,12 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 
-import { ProductService } from './product.service';
-import { Product } from '../../../core/mocks/product.mock';
+import { ProductsService } from './products.service';
+import { Product as ProductMock, CreateProduct as CreateProductMock } from '../../../core/mocks/product.mock';
 import { Pagination } from '../../../core/mocks/pagination.mock';
 
-describe('ProductService', () => {
-  let service: ProductService;
+describe('ProductsService', () => {
+  let service: ProductsService;
   let httpClient: HttpClient;
 
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('ProductService', () => {
   });
 
   beforeEach(() => {
-    service = TestBed.inject(ProductService);
+    service = TestBed.inject(ProductsService);
     httpClient = TestBed.inject(HttpClient);
   })
 
@@ -28,25 +28,32 @@ describe('ProductService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should make request to create new product.', fakeAsync(() => {
+    const product = ProductMock()
+    spyOn(httpClient, 'post').and.returnValue(of(product));
+    service.create(CreateProductMock()).subscribe(p => expect(p).toBe(product));
+    tick();
+  }));
+
   it('should get all products from shareReplay products$ observable.', fakeAsync(() => {
-    const products = [Product(), Product()];
+    const products = [ProductMock(), ProductMock()];
     spyOn(service, 'all').and.returnValue(of(products));
-    service.products$.subscribe(p => expect(p).toEqual(products));
+    service.products$.subscribe(ps => expect(ps).toEqual(products));
     tick();
   }));
 
 
   it('should get all products in database.', fakeAsync(() => {
-    const products = [Product(), Product()];
+    const products = [ProductMock(), ProductMock()];
     spyOn(httpClient, 'get').and.returnValue(of(products));
-    service.all().subscribe(p => expect(p).toEqual(products));
+    service.all().subscribe(ps => expect(ps).toEqual(products));
     tick();
   }));
 
   it('should get products as pagination.', fakeAsync(() => {
-    const products = Pagination([Product()], 10);
+    const products = Pagination([ProductMock()], 10);
     spyOn(httpClient, 'get').and.returnValue(of(products));
-    service.get().subscribe(p => expect(p).toEqual(products));
+    service.get().subscribe(ps => expect(ps).toEqual(products));
     tick();
   }));
 });

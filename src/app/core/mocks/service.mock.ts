@@ -1,12 +1,13 @@
 import faker from 'faker';
 
-import { CreateProduct as CreateProductInterface } from '../../shared/models/product.model';
-import { Product as ProductModel } from '../../shared/models/product.model';
+import { CreateService as CreateServiceInterface } from '../../shared/models/service.model';
+import { Service as ServiceModel } from '../../shared/models/service.model';
 import { _File as FileMock, FileList as FileListMock } from './file.mock';
 import { Category } from './category.mock';
 import { Image } from './image.mock';
 
-export const Product = (): ProductModel => {
+
+export const Service = (): ServiceModel => {
     const name = faker.commerce.productName();
     const price = Math.round(Math.random() * 3500);
     return {
@@ -20,7 +21,6 @@ export const Product = (): ProductModel => {
         price: price,
         discount: Math.floor(price / 1.5),
         in_stock: Math.round(Math.floor(Math.random() * 30)),
-        barcode: `${Math.floor(Math.random() * 1000000000000)}`,
         description: faker.lorem.words(500),
         category: Category(),
         image: Image('App\\Product'),
@@ -28,7 +28,7 @@ export const Product = (): ProductModel => {
     }
 };
 
-export const CreateProduct = (): CreateProductInterface => {
+export const CreateService = (): CreateServiceInterface => {
     const name = faker.commerce.productName();
     const price = Math.round(Math.random() * 3500);
     return {
@@ -39,7 +39,6 @@ export const CreateProduct = (): CreateProductInterface => {
         price: price,
         discount: Math.floor(price / 1.5),
         in_stock: Math.round(Math.floor(Math.random() * 30)),
-        barcode: `${Math.floor(Math.random() * 1000000000000)}`,
         description: faker.lorem.words(500)
     }
 };

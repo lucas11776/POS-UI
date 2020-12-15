@@ -7,7 +7,7 @@ import { of, throwError } from 'rxjs';
 
 import { ProductsComponent } from './products.component';
 import { ProductComponent } from '../../components/product/product.component';
-import { ProductService } from '../../shared/product.service';
+import { ProductsService } from '../../shared/products.service';
 import { Pagination } from '../../../../core/mocks/pagination.mock';
 import { Product } from '../../../../core/mocks/product.mock';
 import { Paginator } from 'src/app/shared/models/pagination.model';
@@ -16,7 +16,7 @@ describe('ProductsComponent', () => {
   let component: ProductsComponent;
   let fixture: ComponentFixture<ProductsComponent>;
   let ngxSpinnerService: NgxSpinnerService;
-  let productService: ProductService;
+  let productsService: ProductsService;
   let products: Paginator;
 
   beforeEach(async(() => {
@@ -39,7 +39,7 @@ describe('ProductsComponent', () => {
     fixture = TestBed.createComponent(ProductsComponent);
     component = fixture.componentInstance;
     ngxSpinnerService = TestBed.inject(NgxSpinnerService);
-    productService = TestBed.inject(ProductService);
+    productsService = TestBed.inject(ProductsService);
     products = Pagination([Product()], 5);
     fixture.detectChanges();
   });
@@ -65,14 +65,14 @@ describe('ProductsComponent', () => {
   }));
 
   it('should assign products when pagination request has completed.', fakeAsync(() => {
-    spyOn(productService, 'get').and.returnValue(of(products));
+    spyOn(productsService, 'get').and.returnValue(of(products));
     component.pagination(2);
     tick();
     expect(component.products).toEqual(products);
   }));
 
   it('should hide spinner when paginate request is complate.', fakeAsync(() => {
-    spyOn(productService, 'get').and.returnValue(of(products));
+    spyOn(productsService, 'get').and.returnValue(of(products));
     component.pagination(2);
     tick();
     expect(ngxSpinnerService.hide).toHaveBeenCalled();
@@ -80,7 +80,7 @@ describe('ProductsComponent', () => {
 
   it('should move window to at top when paginate request is completed.', fakeAsync(() => {
     spyOn(window, 'scroll').and.returnValue();
-    spyOn(productService, 'get').and.returnValue(of(products));
+    spyOn(productsService, 'get').and.returnValue(of(products));
     component.pagination(2);
     tick();
     expect(window.scroll).toHaveBeenCalled();
@@ -88,14 +88,14 @@ describe('ProductsComponent', () => {
 
   it('should assign error when pagination request failed.', fakeAsync(() => {
     const error = { message: 'Something went wrong.' };
-    spyOn(productService, 'get').and.returnValue(throwError(error));
+    spyOn(productsService, 'get').and.returnValue(throwError(error));
     component.pagination(2);
     tick();
     expect(component.error).toEqual(error);
   }));
 
   it('should hide spinner when pagination request failed.', fakeAsync(() => {
-    spyOn(productService, 'get').and.returnValue(throwError({ }));
+    spyOn(productsService, 'get').and.returnValue(throwError({ }));
     component.pagination(2);
     tick();
     expect(ngxSpinnerService.hide).toHaveBeenCalled();

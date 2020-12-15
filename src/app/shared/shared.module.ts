@@ -26,6 +26,11 @@ import { PosSidebarComponent } from './components/pos-sidebar/pos-sidebar.compon
 import { CounterComponent } from './components/counter/counter.component';
 import { ScrollbarDirective } from './directives/scrollbar.directive';
 import { CategoryBadgeGroupComponent } from './components/category-badge-group/category-badge-group.component';
+import { ImagesFormControlComponent } from './components/images-form-control/images-form-control.component';
+import { FileFormControlComponent } from './components/file-form-control/file-form-control.component';
+import { UploadedFileComponent } from './components/uploaded-file/uploaded-file.component';
+import { ToFixedPipe } from './pipes/to-fixed.pipe';
+import { MiddleTruncatePipe } from './pipes/middle-truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -50,6 +55,11 @@ import { CategoryBadgeGroupComponent } from './components/category-badge-group/c
     CounterComponent,
     ScrollbarDirective,
     CategoryBadgeGroupComponent,
+    ImagesFormControlComponent,
+    FileFormControlComponent,
+    UploadedFileComponent,
+    ToFixedPipe,
+    MiddleTruncatePipe,
   ],
   imports: [
     CommonModule,
@@ -76,6 +86,10 @@ import { CategoryBadgeGroupComponent } from './components/category-badge-group/c
     ArrayPipe,
     CounterComponent,
     ScrollbarDirective,
+    ImagesFormControlComponent,
+    FileFormControlComponent,
+    ToFixedPipe,
+    MiddleTruncatePipe,
   ]
 })
 export class SharedModule { }

@@ -2,22 +2,21 @@ import { Image } from './image.model';
 import { Category } from './category.model';
 import { Paginator } from './pagination.model';
 
-export interface UpdateProduct {
+export interface UpdateService {
     category_id: number | null;
     name: string,
     price: number;
     discount: number | null;
     in_stock: number;
-    barcode: string | null;
     description: string;
 }
 
-export interface CreateProduct extends UpdateProduct {
+export interface CreateService extends UpdateService {
     image: File;
     images: FileList | null;
 }
 
-export interface Product extends UpdateProduct {
+export interface Service extends UpdateService {
     id: number,
     create_at: number;
     update_at: number;
@@ -28,6 +27,6 @@ export interface Product extends UpdateProduct {
     images: Image[] | null;
 }
 
-export interface ProductsPagination extends Paginator {
-    data: Product[];
+export interface ServicesPagination extends Paginator {
+    data: Service[];
 }

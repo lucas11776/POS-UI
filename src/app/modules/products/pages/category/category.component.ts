@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SubSink } from 'subsink';
 
-import { CategoryService } from '../../shared/category.service';
+import { CategoriesService } from '../../shared/categories.service';
 import { Category, CreateCategory, UpdateCategory } from '../../../../shared/models/category.model';
 import { Error } from '../../../../shared/models/api.model';
 import { EventBusService } from '../../../../core/services/event-bus.service';
@@ -18,7 +18,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
   formError: any;
 
   constructor(
-    private _categoryService: CategoryService,
+    private _categoryService: CategoriesService,
     private _ngxSpinnerService: NgxSpinnerService,
     private _eventBus: EventBusService) { }
 

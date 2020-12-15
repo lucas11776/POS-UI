@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { RendererFactory2, Renderer2, ElementRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, NgControl } from '@angular/forms';
 
 import { FileDirective } from './file.directive';
@@ -9,6 +10,8 @@ describe('FileDirective', () => {
   let formBuilder: FormBuilder;
   let form: FormGroup;
   let ngControl: NgControl;
+  let renderer: Renderer2;
+  let elementRef: ElementRef;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -23,11 +26,19 @@ describe('FileDirective', () => {
     formBuilder = TestBed.inject(FormBuilder);
     form = formBuilder.group({'image': [null, []]});
     ngControl = <NgControl>{control: form.controls.image};
-    directive = new FileDirective(ngControl);
+    elementRef = new ElementRef(document.createElement('input'));
+    renderer = TestBed.inject(RendererFactory2).createRenderer(null, null);
+    directive = new FileDirective(ngControl, elementRef, renderer);
   });
 
   it('should create File directive.', () => {
     expect(directive).toBeTruthy();
+  });
+
+  it('should if multiple is true check if multiple attributes is added.', () => {
+    directive.multiple = true;
+    directive.ngOnInit();
+    expect(elementRef.nativeElement.attributes.getNamedItem('multiple')).toBeInstanceOf(Attr);
   });
 
   it('should assign single file in file list if change event is trigged and multiple attribute is not set.', () => {
@@ -38,7 +49,7 @@ describe('FileDirective', () => {
 
   it('should assign file list is change event is trigged and multiple attribute isset.', () => {
     let fileList = FileList([_File('pic.png', 'image/png')]);
-    directive.multiple = '';
+    directive.multiple = true;
     directive.inputChange(fileList);
     expect(form.value.image).toEqual(fileList);
   });

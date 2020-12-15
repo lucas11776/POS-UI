@@ -1,0 +1,19 @@
+.card .card-img-top,
+.card .image-icon {
+    width: 100%;
+    height: 100px;
+    line-height: 110px;
+}
+
+.card .image-icon {
+    text-align: center;
+}
+
+.card .image-icon .icon {
+    font-size: 2em;
+    margin: -2em;
+}
+
+ul li span {
+    font-size: 11px;
+}

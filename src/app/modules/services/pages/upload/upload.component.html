@@ -4,7 +4,7 @@
         <div class="card col-lg-8">
             <!-- Card header -->
             <div class="card-header">
-                <h3 class="mb-0">Upload Product Form</h3>
+                <h3 class="mb-0">Upload Service Form</h3>
             </div>
             <!-- Card body -->
             <div class="card-body">
@@ -96,7 +96,7 @@
                                     </div>
                                     <select name="category_id" class="form-control text-capitalize" formControlName="category_id">
                                         <option hidden value="" disabled selected>---Categories---</option>
-                                        <option *ngFor="let category of categories$ | async" [value]="category.id">{{ category.name }}</option>
+                                        <option *ngFor="let category of categories | async" [value]="category.id">{{ category.name }}</option>
                                     </select>
                                 </div>
                                 <div class="invalid-feedback">
@@ -119,20 +119,6 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <!-- Barcode -->
-                            <div class="form-group">
-                                <div class="input-group input-group-merge input-group-alternative" [ngClass]="{ 'is-invalid': form.controls.barcode.invalid && form.controls.barcode.dirty }">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-barcode"></i></span>
-                                    </div>
-                                    <input class="form-control" placeholder="Barcode" type="text" formControlName="barcode">
-                                </div>
-                                <div class="invalid-feedback">
-                                    <span *ngIf="form.controls.barcode.errors?.numeric">{{ formErrors.barcode.invalid }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
                             <!-- Description -->
                             <div class="form-group">
                                 <textarea name="description" class="form-control form-control-lg" rows="8" placeholder="Description..." formControlName="description" [ngClass]="{ 'is-invalid': form.controls.description.invalid && form.controls.description.dirty }"></textarea>
@@ -148,7 +134,7 @@
                         <div class="col-12">
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary mb-2" (click)="upload()" [disabled]="!form.invalid">
-                                    Upload Product
+                                    Upload Service
                                 </button>
                             </div>
                         </div>
