@@ -8,7 +8,10 @@ import { CategoryComponent } from './category.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { CategoriesService } from '../../shared/categories.service';
 import { Category } from '../../../../shared/models/category.model';
-import { CreateCategory, Category as CategoryMock, UpdateCategory } from '../../../../core/mocks/category.mock';
+import {
+  CreateCategory as CreateCategoryMock,
+  Category as CategoryMock,
+  UpdateCategory as UpdateCategoryMock } from '../../../../core/mocks/category.mock';
 import { HttpService } from '../../../../core/http/http.service';
 import { EventBusService } from '../../../../core/services/event-bus.service';
 
@@ -57,7 +60,7 @@ describe('CategoryComponent', () => {
   });
 
   it('should display loader when making request to create new category.', () => {
-    component.create(CreateCategory());
+    component.create(CreateCategoryMock());
     expect(ngxSpinnerService.show).toHaveBeenCalled();
   });
 
@@ -67,14 +70,14 @@ describe('CategoryComponent', () => {
     spyOn(httpService, 'post').and.returnValue(of(category));
     let categories = null;
     component.categories$.subscribe(c => categories = c)
-    component.create(CreateCategory());
+    component.create(CreateCategoryMock());
     tick();
     expect(categories).toEqual(categoriesList);
   }));
 
   it('should hide spinner when create category request is complete.', fakeAsync(() => {
     spyOn(categoryService, 'create').and.returnValue(of(category));
-    component.create(CreateCategory());
+    component.create(CreateCategoryMock());
     tick();
     expect(ngxSpinnerService.hide).toHaveBeenCalled();
   }));
@@ -82,20 +85,20 @@ describe('CategoryComponent', () => {
   it('should emit a category created event when create request is complete.', fakeAsync(() => {
     spyOn(categoryService, 'create').and.returnValue(of(category));
     spyOn(eventBusService, 'emit').and.returnValue();
-    component.create(CreateCategory());
+    component.create(CreateCategoryMock());
     tick();
     expect(eventBusService.emit).toHaveBeenCalled();
   }));
 
   it('should hide spinner when create category request failed.', fakeAsync(() => {
     spyOn(categoryService, 'create').and.returnValue(throwError({ message: 'Something went wrong...' }));
-    component.create(CreateCategory());
+    component.create(CreateCategoryMock());
     tick();
     expect(ngxSpinnerService.hide).toHaveBeenCalled();
   }));
 
   it('should display loader when making request to update a category.', () => {
-    component.update(UpdateCategory());
+    component.update(UpdateCategoryMock());
     expect(ngxSpinnerService.show).toHaveBeenCalled();
   });
 
@@ -105,21 +108,21 @@ describe('CategoryComponent', () => {
     spyOn(httpService, 'patch').and.returnValue(of(category));
     let categories = null;
     component.categories$.subscribe(c => categories = c);
-    component.update(UpdateCategory());
+    component.update(UpdateCategoryMock());
     tick();
     expect(categories).toEqual(categoriesList);
   }));
 
   it('should hide spinner when update category request is complete.', fakeAsync(() => {
     spyOn(categoryService, 'update').and.returnValue(of(category));
-    component.update(UpdateCategory());
+    component.update(UpdateCategoryMock());
     tick();
     expect(ngxSpinnerService.hide).toHaveBeenCalled();
   }));
 
   it('should hide spinner when update category request failed.', fakeAsync(() => {
     spyOn(categoryService, 'update').and.returnValue(throwError({ message: 'Something went wrong...' }));
-    component.update(UpdateCategory());
+    component.update(UpdateCategoryMock());
     tick();
     expect(ngxSpinnerService.hide).toHaveBeenCalled();
   }));

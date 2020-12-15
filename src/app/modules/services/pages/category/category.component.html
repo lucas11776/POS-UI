@@ -1,1 +1,8 @@
 <ks-header name="Category" class="pb-6"></ks-header>
+<div class="container mt--6">
+    <div class="row justify-content-center">
+        <div class="col-sm-10 col-md-8 col-lg-6">
+            <ks-categories [categories]="categories$ | async" (create)="create($event)" (delete)="delete($event)" (update)="update($event)"></ks-categories>
+        </div>
+    </div>
+</div>

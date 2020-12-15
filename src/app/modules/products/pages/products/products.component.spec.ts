@@ -6,10 +6,10 @@ import { SharedModule } from '../../../../shared/shared.module';
 import { of, throwError } from 'rxjs';
 
 import { ProductsComponent } from './products.component';
-import { ProductComponent } from '../../components/product/product.component';
+import { ProductsModule } from '../../products.module';
 import { ProductsService } from '../../shared/products.service';
 import { Pagination } from '../../../../core/mocks/pagination.mock';
-import { Product } from '../../../../core/mocks/product.mock';
+import { Product as ProductMock } from '../../../../core/mocks/product.mock';
 import { Paginator } from 'src/app/shared/models/pagination.model';
 
 describe('ProductsComponent', () => {
@@ -23,13 +23,13 @@ describe('ProductsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ProductsComponent,
-        ProductComponent,
       ],
       imports: [
         SharedModule,
         RouterTestingModule,
         HttpClientTestingModule,
         NgxSpinnerModule,
+        ProductsModule,
       ]
     })
     .compileComponents();
@@ -40,7 +40,7 @@ describe('ProductsComponent', () => {
     component = fixture.componentInstance;
     ngxSpinnerService = TestBed.inject(NgxSpinnerService);
     productsService = TestBed.inject(ProductsService);
-    products = Pagination([Product()], 5);
+    products = Pagination([ProductMock()], 5);
     fixture.detectChanges();
   });
 

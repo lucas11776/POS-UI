@@ -8,7 +8,7 @@ import { Category, CreateCategory, UpdateCategory } from '../../../shared/models
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class CategoriesService {
   private categorisSubject = new BehaviorSubject<void>(null);
   categories$: Observable<Category[]> = this.categorisSubject.pipe(
     switchMap(_ => this.get()),
