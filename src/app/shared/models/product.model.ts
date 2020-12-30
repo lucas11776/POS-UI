@@ -19,8 +19,8 @@ export interface CreateProduct extends UpdateProduct {
 
 export interface Product extends UpdateProduct {
     id: number,
-    create_at: number;
-    update_at: number;
+    created_at: number;
+    updated_at: number;
     deleted_at: string | null;
     url: string,
     category: Category | null;

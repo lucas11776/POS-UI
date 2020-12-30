@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductComponent } from './product.component';
+import { SharedModule } from '../../../../shared/shared.module';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
@@ -8,7 +9,12 @@ describe('ProductComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductComponent ]
+      declarations: [
+        ProductComponent
+      ],
+      imports: [
+        SharedModule
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +25,7 @@ describe('ProductComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should check if Product component is created.', () => {
     expect(component).toBeTruthy();
   });
 });

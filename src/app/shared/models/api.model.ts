@@ -1,5 +1,8 @@
-export interface Response {
+export interface Message {
     message: string;
+}
+
+export interface Response extends Message {
     data?: any;
     error?: any;  
 }

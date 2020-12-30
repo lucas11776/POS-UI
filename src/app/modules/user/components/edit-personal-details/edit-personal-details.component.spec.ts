@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 import { EditPersonalDetailsComponent } from './edit-personal-details.component';
 
@@ -8,7 +10,14 @@ describe('EditPersonalDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditPersonalDetailsComponent ]
+      declarations: [
+        EditPersonalDetailsComponent
+      ],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        RxReactiveFormsModule
+      ]
     })
     .compileComponents();
   }));

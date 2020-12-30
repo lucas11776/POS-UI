@@ -11,8 +11,8 @@ export const Product = (): ProductModel => {
     const price = Math.round(Math.random() * 3500);
     return {
         id: Math.floor(Math.random() * 200),
-        create_at: faker.date.recent(),
-        update_at: faker.date.recent(),
+        created_at: faker.date.recent(),
+        updated_at: faker.date.recent(),
         deleted_at: null,
         category_id: Math.floor(Math.random() * 20),
         name: name,

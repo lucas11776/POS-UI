@@ -1,11 +1,29 @@
 import faker from 'faker'
-import { Image } from './image.mock';
 
 import {
     User as UserInterface,
     Profile as ProfileInterface,
-    PersonalDetails as PersonalDetailsInterface } from '../../shared/models/user.model';
+    PersonalDetails as PersonalDetailsInterface,
+    UploadProfilePicture as UploadProfilePictureInterface,
+    Description as DescriptionInterface
+} from '../../shared/models/user.model';
+import { Image as ImageMock } from './image.mock';
+import { Address as AddressMock } from './address.mock';
+import { _File as FileMock, _File } from './file.mock';
 import { Gender } from '../../shared/models/gender.model';
+import { Role } from '../../shared/models/role.model';
+
+export const UploadProfilePicture = (): UploadProfilePictureInterface => {
+    return {
+        image: _File('sefie.png', 'image/png')
+    }
+}
+
+export const Description = (): DescriptionInterface => {
+    return {
+        description: faker.random.words(100)
+    }
+} 
 
 export const PersonalDetails = (): PersonalDetailsInterface => {
     return {
@@ -22,6 +40,7 @@ export const User = (): UserInterface => {
             id: Math.floor(Math.random() * 200),
             created_at: faker.date.recent(),
             updated_at: faker.date.recent(),
+            image: ImageMock('App\\User'),
             email_verified_at: faker.internet.email(),
             email: faker.date.past(),
             cellphone_number: '',
@@ -30,9 +49,12 @@ export const User = (): UserInterface => {
     };
 }
 
-export const Profile = (): ProfileInterface => {
+export const Profile = (roles: Role[] = []): ProfileInterface => {
     return {
-        ... User(),
-        ... { image: Image('App\\User') }
+        ... {
+            roles: roles,
+            address: AddressMock()
+        },
+        ... User()
     };
 }

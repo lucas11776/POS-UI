@@ -18,8 +18,8 @@ export interface CreateService extends UpdateService {
 
 export interface Service extends UpdateService {
     id: number,
-    create_at: number;
-    update_at: number;
+    created_at: number;
+    updated_at: number;
     deleted_at: string | null;
     url: string,
     category: Category | null;

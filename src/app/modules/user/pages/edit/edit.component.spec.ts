@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { EditComponent } from './edit.component';
 import { UserModule } from '../../user.module';
@@ -16,6 +17,7 @@ describe('EditComponent', () => {
       imports: [
         UserModule,
         SharedModule,
+        RouterTestingModule,
       ]
     })
     .compileComponents();

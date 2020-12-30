@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 import { EditAddressComponent } from './edit-address.component';
 
@@ -8,7 +10,14 @@ describe('EditAddressComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditAddressComponent ]
+      declarations: [
+        EditAddressComponent
+      ],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        RxReactiveFormsModule,
+      ]
     })
     .compileComponents();
   }));

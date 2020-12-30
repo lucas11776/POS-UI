@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 import { EditDescriptionComponent } from './edit-description.component';
 
@@ -8,7 +10,14 @@ describe('EditDescriptionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditDescriptionComponent ]
+      declarations: [
+        EditDescriptionComponent
+      ],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        RxReactiveFormsModule,
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +28,7 @@ describe('EditDescriptionComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should check if EditDescription component is created.', () => {
     expect(component).toBeTruthy();
   });
 });
