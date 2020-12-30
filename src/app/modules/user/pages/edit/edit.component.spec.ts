@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditComponent } from './edit.component';
+import { UserModule } from '../../user.module';
+import { SharedModule } from '../../../../shared/shared.module';
 
 describe('EditComponent', () => {
   let component: EditComponent;
@@ -8,7 +10,13 @@ describe('EditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditComponent ]
+      declarations: [
+        EditComponent
+      ],
+      imports: [
+        UserModule,
+        SharedModule,
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +27,7 @@ describe('EditComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should check if Edit component is created.', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
+import { SubSink } from 'subsink';
 
 import { AuthenticationService } from '../../../../core/authentication/authentication.service';
 import { Gender } from '../../../../shared/models/gender.model';
 import { Errors } from '../../../../shared/errors/form.error';
 import { Register, Token } from '../../../../shared/models/authentication.model';
 import { TokenService } from '../../../../core/authentication/token.service';
-// import { requiredIf } from '../../../../core/validators/form-validators';
 
 @Component({
   templateUrl: './register.component.html',
@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   form: FormGroup;
   formErrors = Errors;
   gender: string[] = Gender;
-  registerSubscription: Subscription;
+  sub = new SubSink;
   error;
 
   constructor(
@@ -32,13 +32,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
-      'first_name': [null, [RxwebValidators.required(), RxwebValidators.minLength({ value: 3 }), RxwebValidators.maxLength({ value: 50 })]],
-      'last_name': [null, [RxwebValidators.required(), RxwebValidators.minLength({ value: 3 }), RxwebValidators.maxLength({ value: 50 })]],
-      'gender': ['', [RxwebValidators.oneOf({ matchValues: Gender })]],
-      'email': [null, [RxwebValidators.required({ conditionalExpression: this.cellphoneNotEmpty }), RxwebValidators.email()]],
-      'cellphone_number': [null, [RxwebValidators.required({ conditionalExpression: this.emailNotEmpty }), RxwebValidators.pattern({expression: { pattern: /\+[0-9]{11,11}/ }})]],
-      'password': [null, [RxwebValidators.required(), RxwebValidators.minLength({ value: 8 }), RxwebValidators.maxLength({ value: 20 }), RxwebValidators.pattern({ expression: { pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])/ } })]],
-      'password_confirmation': [null, [RxwebValidators.required(), RxwebValidators.compare({ fieldName: 'password' })]]
+      first_name: [null, [RxwebValidators.required(), RxwebValidators.minLength({ value: 3 }), RxwebValidators.maxLength({ value: 50 })]],
+      last_name: [null, [RxwebValidators.required(), RxwebValidators.minLength({ value: 3 }), RxwebValidators.maxLength({ value: 50 })]],
+      gender: ['', [RxwebValidators.oneOf({ matchValues: Gender })]],
+      email: [null, [RxwebValidators.required({ conditionalExpression: this.cellphoneNotEmpty }), RxwebValidators.email()]],
+      cellphone_number: [null, [RxwebValidators.required({ conditionalExpression: this.emailNotEmpty }), RxwebValidators.pattern({expression: { pattern: /\+[0-9]{11,11}/ }})]],
+      password: [null, [RxwebValidators.required(), RxwebValidators.minLength({ value: 8 }), RxwebValidators.maxLength({ value: 20 }), RxwebValidators.pattern({ expression: { pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])/ } })]],
+      password_confirmation: [null, [RxwebValidators.required(), RxwebValidators.compare({ fieldName: 'password' })]]
     });
   }
 
@@ -53,12 +53,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
   register(): void {
     this.error = null;
     this._ngxSpinnerService.show();
-    this.registerSubscription = this._authenticationService.register(this.form.value)
-      .subscribe(token => this.registered(token), error => this.registrationFailed(error));
+    this.sub.sink = this._authenticationService.register(this.form.value)
+      .subscribe(
+        token => this.registered(token),
+        error => this.registrationFailed(error));
   }
 
   ngOnDestroy(): void {
-    if(this.registerSubscription) this.registerSubscription.unsubscribe();
+    this.sub.unsubscribe();
   }
 
   protected registered(token: Token): void {
