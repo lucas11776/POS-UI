@@ -10,6 +10,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { EditPersonalDetailsComponent } from './components/edit-personal-details/edit-personal-details.component';
 import { EditAddressComponent } from './components/edit-address/edit-address.component';
 import { EditDescriptionComponent } from './components/edit-description/edit-description.component';
+import { UploadProfilePictureComponent } from './components/upload-profile-picture/upload-profile-picture.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { EditDescriptionComponent } from './components/edit-description/edit-des
     ProfileComponent,
     EditPersonalDetailsComponent,
     EditAddressComponent,
-    EditDescriptionComponent
+    EditDescriptionComponent,
+    UploadProfilePictureComponent
   ],
   imports: [
     CommonModule,

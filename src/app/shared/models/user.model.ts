@@ -39,3 +39,7 @@ export interface Profile extends User {
     address?: Address;
     roles: Role[];
 }
+
+export interface UploadProfilePicture {
+    image: File;
+}

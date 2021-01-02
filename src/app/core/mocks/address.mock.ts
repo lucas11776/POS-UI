@@ -42,7 +42,7 @@ export const UpdateAddress = (): UpdateAddressInterface => {
     }
 }
 
-export const CountriesValidator = (countries: CountryInterface[] = []): AsyncValidatorFn => {
+export const CountriesValidator = (countries: CountryInterface[]): AsyncValidatorFn => {
     return (control: AbstractControl): Promise<ValidationErrors|null> => {
         return new Promise(resolve => {
             let country = countries.filter(country => control.value == country.id);
