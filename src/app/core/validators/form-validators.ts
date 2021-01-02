@@ -1,9 +1,10 @@
-import { AbstractControl, AsyncValidatorFn, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, AsyncValidator, AsyncValidatorFn, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 
 import { WordsConfig } from './extension/words.config';
+import { FileConfig } from './extension/file.config';
 import { Country } from '../../shared/models/address.model';
 
 export const words = (config: WordsConfig): ValidatorFn => {
@@ -31,4 +32,34 @@ export const country = (countries: Observable<Country[]>): AsyncValidatorFn => {
             })
         )
     }
-} 
+}
+
+export const file = (config: FileConfig): ValidationErrors => {
+    return (control: AbstractControl) => {
+        const file = control.value;
+        /* istanbul ignore else */
+        if(file instanceof File) {
+            /* istanbul ignore else */
+            if(config.minSize && config.minSize > file.size)
+                return { minSize: true };
+            /* istanbul ignore else */
+            if(config.maxSize && file.size > config.maxSize)
+                return { maxSize: true };
+            /* istanbul ignore else */
+            if(config.extension) {
+                let fileExtension = file.name.split('.');
+                /* istanbul ignore else */
+                if(!config.extension.includes(fileExtension[--fileExtension.length]))
+                    return  { extension: true };
+            }
+            /* istanbul ignore else */
+            if(config.type) {
+                /* istanbul ignore else */
+                if(!config.type.includes(file.type))
+                    return { type: true };
+            }
+
+        }
+        return null;
+    }
+}
