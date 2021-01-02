@@ -1,15 +1,25 @@
-<form name="update_personal_details">
+<form [formGroup]="form" name="update_personal_details">
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
                 <label class="form-control-label" for="input-username">Name</label>
-                <input type="text" name="first_name" id="input-username" class="form-control" placeholder="Username">
+                <input type="text" name="first_name" id="input-username" class="form-control" placeholder="Username" formControlName="first_name" [ngClass]="{ 'is-invalid': form.controls.first_name.invalid && form.controls.first_name.dirty }">
+                <div class="invalid-feedback" *ngIf="form.controls.first_name.dirty">
+                    <span *ngIf="form.controls.first_name.errors?.required">{{ formErrors.first_name.required }}</span>
+                    <span *ngIf="form.controls.first_name.errors?.minLength">{{ formErrors.first_name.min }}</span>
+                    <span *ngIf="form.controls.first_name.errors?.maxLength">{{ formErrors.first_name.max }}</span>
+                </div>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label class="form-control-label" for="input-email">Surname</label>
-                <input type="email" name="last_name" id="input-email" class="form-control">
+                <input type="email" name="last_name" id="input-email" class="form-control" formControlName="last_name" [ngClass]="{ 'is-invalid': form.controls.last_name.invalid && form.controls.last_name.dirty }">
+                <div class="invalid-feedback" *ngIf="form.controls.last_name.dirty">
+                    <span *ngIf="form.controls.last_name.errors?.required">{{ formErrors.last_name.required }}</span>
+                    <span *ngIf="form.controls.last_name.errors?.minLength">{{ formErrors.last_name.min }}</span>
+                    <span *ngIf="form.controls.last_name.errors?.maxLength">{{ formErrors.last_name.max }}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -17,11 +27,14 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label class="form-control-label" for="input-first-name">Gender</label>
-                <input type="text" name="gender" id="input-first-name" class="form-control" placeholder="First name">
+                <select name="gender" class="form-control text-capitalize" formControlName="gender" [ngClass]="{ 'is-invalid': form.controls.gender.invalid && form.controls.gender.dirty }">
+                    <option hidden value="" disabled selected>Gender</option>
+                    <option *ngFor="let g of gender" [value]="g">{{ g }}</option>
+                </select>
             </div>
         </div>
         <div class="col-12">
-            <button type="submit" class="btn btn-primary">Change</button>
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Change</button>
         </div>
     </div>
 </form>

@@ -1,6 +1,10 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { filter, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 
 import { WordsConfig } from './extension/words.config';
+import { Country } from '../../shared/models/address.model';
 
 export const words = (config: WordsConfig): ValidatorFn => {
     return (control: AbstractControl) => {
@@ -17,3 +21,14 @@ export const words = (config: WordsConfig): ValidatorFn => {
         return null;
     }
 }
+
+export const country = (countries: Observable<Country[]>): AsyncValidatorFn => {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+        return countries.pipe(
+            map(countries => {
+                let country = countries.filter(country => country.id == control.value);
+                return country.length == 0 ? null : { invalid: true };
+            })
+        )
+    }
+} 

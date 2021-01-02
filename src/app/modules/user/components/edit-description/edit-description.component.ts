@@ -4,6 +4,7 @@ import { RxwebValidators } from '@rxweb/reactive-form-validators';
 
 import { Description, Profile } from '../../../../shared/models/user.model';
 import { Errors } from '../../../../shared/errors/form.error';
+import { words } from '../../../../core/validators/form-validators';
 
 @Component({
   selector: 'ks-edit-description',
@@ -20,8 +21,11 @@ export class EditDescriptionComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
-      description: [this.profile.description || null, []]
+      description: [this.profile.description || null, [RxwebValidators.required(), words({ maxWords: 1500 })]]
     });
   }
 
+  update(): void {
+    this.updateEvent.next(this.form.value);
+  }
 }

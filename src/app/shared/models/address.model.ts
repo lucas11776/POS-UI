@@ -1,9 +1,14 @@
+export interface Country {
+    id: number;
+    name: string;
+}
+
 export interface Address {
     id: number,
     created_at: string;
     updated_at: string;
     address: string | null;
-    country: string | null;
+    country: Country | null;
     city: string | null;
     postal_code: string | null;
 }

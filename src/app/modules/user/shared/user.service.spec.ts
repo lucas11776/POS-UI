@@ -39,7 +39,7 @@ describe('UserService', () => {
 
   it('should get user profile from subject.', fakeAsync(() => {
     spyOn(httpService, 'get').and.returnValue(of(profile));
-    service.profile
+    service.profile$
       .subscribe(p => expect(p).toEqual(profile));
     tick();
   }));
@@ -66,7 +66,7 @@ describe('UserService', () => {
   }));
 
   it('should update user description', fakeAsync(() => {
-    spyOn(httpService, 'post').and.returnValue(of(profile));
+    spyOn(httpService, 'patch').and.returnValue(of(profile));
     service.updateDescription(DescriptionMock())
       .subscribe(p => expect(p).toEqual(profile));
     tick();

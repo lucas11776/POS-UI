@@ -15,6 +15,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   @Output('update') updateEvent = new EventEmitter<PersonalDetails>();
   @Input('user') user: PersonalDetails = <any>{};
   formErrors = Errors;
+  gender = Gender;
   form: FormGroup;
 
   constructor(private _formBuilder: FormBuilder) { }
@@ -27,4 +28,7 @@ export class EditPersonalDetailsComponent implements OnInit {
     });
   }
 
+  update(): void {
+    this.updateEvent.next(this.form.value);
+  }
 }

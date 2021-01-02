@@ -1,9 +1,13 @@
-<form>
+<form [formGroup]="form">
     <div class="form-group">
         <label class="form-control-label">Description</label>
-        <textarea rows="4" class="form-control" placeholder="A few words about you ..."></textarea>
+        <textarea rows="4" class="form-control" placeholder="A quick description about your self." formControlName="description" [ngClass]="{ 'is-invalid': form.controls.description.invalid && form.controls.description.dirty }"></textarea>
+        <div class="invalid-feedback" *ngIf="form.controls.description.dirty">
+            <span *ngIf="form.controls.description.errors?.required">{{ formErrors.description.required }}</span>
+            <span *ngIf="form.controls.description.errors?.maxWords">{{ formErrors.description.max }}</span>
+        </div>
     </div>
     <div>
-        <button type="submit" class="btn btn-primary">Change</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Change</button>
     </div>
 </form>

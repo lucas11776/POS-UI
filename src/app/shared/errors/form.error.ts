@@ -64,5 +64,18 @@ export const Errors = {
     description: {
         required: 'The description is required.',
         max: 'The description must contain maximum of 1500 words'
+    },
+    address: {
+        invalid: 'Invalid address please enter correct address e.g (23 Main Street).'
+    },
+    city: {
+        min: 'The city must contain minimum of 3 charactors.',
+        max: 'The city must contain maximum of 50 charactors.'
+    },
+    country: {
+        invalid: 'Invalid country please select correct country.'
+    },
+    postal_code: {
+        invalid: 'The postal code is invalid postal code must contain digits between length 4 to 10'
     }
 }

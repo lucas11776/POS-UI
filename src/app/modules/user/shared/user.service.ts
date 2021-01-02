@@ -13,7 +13,7 @@ import { Message } from '../../../shared/models/api.model';
 })
 export class UserService {
   private profileSubject = new BehaviorSubject<Profile>(null);
-  profile: Observable<Profile> = this.profileSubject.pipe(
+  profile$: Observable<Profile> = this.profileSubject.pipe(
     concatMap(profile => profile == null ? this.fetchProfile() : of(profile))
   );
 

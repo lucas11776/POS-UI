@@ -1,31 +1,46 @@
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-            <label class="form-control-label" for="input-address">Address</label>
-            <input id="input-address" class="form-control" placeholder="Home Address" type="text">
+<form [formGroup]="form">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="form-control-label" for="input-address">Address</label>
+                <input id="input-address" class="form-control" placeholder="Home Address" type="text" formGroupName="address" [ngClass]="{ 'is-invalid': form.controls.address.invalid && form.controls.address.dirty }">
+                <div class="invalid-feedback" *ngIf="form.controls.address.dirty">
+                    <span *ngIf="form.controls.address.errors?.invalid">{{ formErrors.address.invalid }}</span>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-lg-4">
-        <div class="form-group">
-            <label class="form-control-label" for="input-city">City</label>
-            <input type="text" id="input-city" class="form-control" placeholder="City">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label class="form-control-label" for="input-city">City</label>
+                <input type="text" id="input-city" class="form-control" placeholder="City" formGroupName="city" [ngClass]="{ 'is-invalid': form.controls.city.invalid && form.controls.city.dirty }">
+                <div class="invalid-feedback" *ngIf="form.controls.city.dirty">
+                    <span *ngIf="form.controls.city.errors?.minLength">{{ formErrors.city.min }}</span>
+                    <span *ngIf="form.controls.city.errors?.maxLength">{{ formErrors.city.max }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label class="form-control-label" for="input-country">Country</label>
+                <input type="text" id="input-country" class="form-control" placeholder="Country" formGroupName="country_id" [ngClass]="{ 'is-invalid': form.controls.country_id.invalid && form.controls.country_id.dirty }">
+            </div>
+            <div class="invalid-feedback" *ngIf="form.controls.country_id.dirty">
+                <span *ngIf="form.controls.country_id.errors?.invalid">{{ formErrors.country.invalid }}</span>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label class="form-control-label" for="input-country">Postal code</label>
+                <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code" formGroupName="postal_code" [ngClass]="{ 'is-invalid': form.controls.postal_code.invalid && form.controls.postal_code.dirty }">
+                <div class="invalid-feedback" *ngIf="form.controls.postal_code.dirty">
+                    <span *ngIf="form.controls.postal_code.errors?.invalid">{{ formErrors.postal_code.invalid }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Change</button>
         </div>
     </div>
-    <div class="col-lg-4">
-        <div class="form-group">
-            <label class="form-control-label" for="input-country">Country</label>
-            <input type="text" id="input-country" class="form-control" placeholder="Country">
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="form-group">
-            <label class="form-control-label" for="input-country">Postal code</label>
-            <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code">
-        </div>
-    </div>
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">Change</button>
-    </div>
-</div>
+</form>

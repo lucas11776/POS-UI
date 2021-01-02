@@ -1,16 +1,20 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { of } from 'rxjs';
 
 import { NavbarComponent } from './navbar.component';
-import { SidebarService } from '../../services/sidebar.service';
 import { EventBusService } from '../../../core/services/event-bus.service';
+import { UserService } from '../../../modules/user/shared/user.service';
+import { Profile as ProfileMock } from '../../../core/mocks/user.mock';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
   let eventBusService: EventBusService;
   let ngbMadal: NgbModal;
+  let userService: UserService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -20,6 +24,7 @@ describe('NavbarComponent', () => {
       imports: [
         NgbModule,
         HttpClientTestingModule,
+        RouterTestingModule,
       ]
     })
     .compileComponents();
@@ -30,6 +35,7 @@ describe('NavbarComponent', () => {
     component = fixture.componentInstance;
     eventBusService = TestBed.inject(EventBusService);
     ngbMadal = TestBed.inject(NgbModal);
+    userService = TestBed.inject(UserService);
     fixture.detectChanges();
   });
 
@@ -46,4 +52,13 @@ describe('NavbarComponent', () => {
     component.logout();
     expect(ngbMadal.open).toHaveBeenCalled();
   });
+
+  it('should get user profile from profile$ property.', fakeAsync(() => {
+    const profile = ProfileMock()
+    spyOn(userService, 'fetchProfile').and.returnValue(of(profile));
+    component.profile$
+      .subscribe(p => expect(p).toBe(profile));
+    tick();
+    fixture.detectChanges();
+  }));
 });
