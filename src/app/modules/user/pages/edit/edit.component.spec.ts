@@ -9,8 +9,11 @@ import { UserService } from '../../shared/user.service';
 import { UserModule } from '../../user.module';
 import { SharedModule } from '../../../../shared/shared.module';
 import { _File as FileMock } from '../../../../core/mocks/file.mock';
-import { Profile as ProfileMock } from '../../../../core/mocks/user.mock';
 import { UpdateAddress as UpdateAddressMock } from '../../../../core/mocks/address.mock';
+import {
+  Profile as ProfileMock,
+  PersonalDetails as PersonalDetailsMock
+} from '../../../../core/mocks/user.mock';
 
 describe('EditComponent', () => {
   let component: EditComponent;
@@ -52,11 +55,48 @@ describe('EditComponent', () => {
   });
 
   /**
+   * Update Personal Details Testcases
+   */
+
+  it('should clear updatePersonalDetailsError when updatePersonalDetails is called.', () => {
+    component.updatePersonalDetailsError = { message: 'Something went wrong please try again later...' };
+    component.updatePersonalDetails(PersonalDetailsMock());
+    expect(component.updatePersonalDetailsError).toBeNull();
+  });
+
+  it('should display spinner when updating personal details.', () => {
+    component.updatePersonalDetails(PersonalDetailsMock());
+    expect(ngxSpinnerService.show).toHaveBeenCalled();
+  });
+
+  it('should close spinner when updatePersonalDetails request was successfully.', fakeAsync(() => {
+    spyOn(userService, 'updatePersonalDetails').and.returnValue(of(ProfileMock()));
+    component.updatePersonalDetails(PersonalDetailsMock());
+    tick();
+    expect(ngxSpinnerService.hide).toHaveBeenCalled();
+  }));
+
+  it('should assing updatePersonalDetails error to updatePersonalDetailsError if update personal details request failed.', fakeAsync(() => {
+    let error = { message: 'Something went wrong please try again later...' };
+    spyOn(userService, 'updatePersonalDetails').and.returnValue(throwError(error));
+    component.updatePersonalDetails(PersonalDetailsMock());
+    tick();
+    expect(component.updatePersonalDetailsError).toEqual(error);
+  }));
+
+  it('should close spinner when update personal details request failed.', fakeAsync(() => {
+    spyOn(userService, 'updatePersonalDetails').and.returnValue(throwError({ message: 'Something went wrong please try again later....' }));
+    component.updatePersonalDetails(PersonalDetailsMock());
+    tick();
+    expect(ngxSpinnerService.hide).toHaveBeenCalled();
+  }));
+  
+  /**
    * Upload Profile Picture Testcases
    */
 
   it('should clear upload profile picture error when uploadProfilePicture is called.', () => {
-    component.uploadProfilePictureError = { message: 'Something went wrong' };
+    component.uploadProfilePictureError = { message: 'Something went wrong please try again later...' };
     component.uploadProfilePicture({ image: FileMock('img.png', 'image/png') });
     expect(component.uploadProfilePictureError).toBeNull();
   });
@@ -74,7 +114,7 @@ describe('EditComponent', () => {
   }));
 
   it('should assing uploadProfilePicture error to uploadProfilePictureError if upload profile picture request failed.', fakeAsync(() => {
-    let error = { message: 'Something went wrong' };
+    let error = { message: 'Something went wrong please try again later...' };
     spyOn(userService, 'uploadProfilePicture').and.returnValue(throwError(error));
     component.uploadProfilePicture({ image: FileMock('img.png', 'image/png') });
     tick();
@@ -82,7 +122,7 @@ describe('EditComponent', () => {
   }));
 
   it('should close spinner when upload profile picture request failed.', fakeAsync(() => {
-    spyOn(userService, 'uploadProfilePicture').and.returnValue(throwError({ message: 'Something went wrong.' }));
+    spyOn(userService, 'uploadProfilePicture').and.returnValue(throwError({ message: 'Something went wrong please try again later....' }));
     component.uploadProfilePicture({ image: FileMock('img.png', 'image/png') });
     tick();
     expect(ngxSpinnerService.hide).toHaveBeenCalled();
@@ -93,7 +133,7 @@ describe('EditComponent', () => {
    */
 
   it('should clear updateAddressError when update address is called.', () => {
-    component.updateAddressError = { message: 'Something went wrong' };
+    component.updateAddressError = { message: 'Something went wrong please try again later...' };
     component.updateAddress(UpdateAddressMock());
     expect(component.updateAddressError).toBeNull();
   });
@@ -111,7 +151,7 @@ describe('EditComponent', () => {
   }));
 
   it('should assign updateAddress error to updateAddressError if update address request failed.', fakeAsync(() => {
-    let error = { message: 'Something went wrong' };
+    let error = { message: 'Something went wrong please try again later...' };
     spyOn(userService, 'updateAddress').and.returnValue(throwError(error));
     component.updateAddress(UpdateAddressMock());
     tick();
@@ -119,7 +159,7 @@ describe('EditComponent', () => {
   }));
 
   it('should close spinner when update addres request failed.', fakeAsync(() => {
-    spyOn(userService, 'updateAddress').and.returnValue(throwError({ message: 'Something went wrong.' }));
+    spyOn(userService, 'updateAddress').and.returnValue(throwError({ message: 'Something went wrong please try again later....' }));
     component.updateAddress(UpdateAddressMock());
     tick();
     expect(ngxSpinnerService.hide).toHaveBeenCalled();
