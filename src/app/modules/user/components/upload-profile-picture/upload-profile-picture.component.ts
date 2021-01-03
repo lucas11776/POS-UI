@@ -5,6 +5,7 @@ import { SubSink } from 'subsink';
 
 import { UploadProfilePicture } from '../../../../shared/models/user.model';
 import { file } from '../../../../core/validators/form-validators';
+import { Errors } from 'src/app/shared/errors/form.error';
 
 @Component({
   selector: 'ks-upload-profile-picture',
@@ -14,6 +15,7 @@ import { file } from '../../../../core/validators/form-validators';
 export class UploadProfilePictureComponent implements OnInit, OnDestroy {
   @Output('upload') uploadEvent = new EventEmitter<UploadProfilePicture>();
   @ViewChild('input', { read: ElementRef }) input: ElementRef;
+  formErrors = Errors;
   sub = new SubSink;
   form: FormGroup;
 
@@ -21,7 +23,7 @@ export class UploadProfilePictureComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
-      image: [null, []]
+      image: [null, [RxwebValidators.required(), file({ type: ['image/png', 'image/jpg'], maxSize: (1024 * 1024) * 3 })]]
     });
     this.sub.sink = this.form.valueChanges
       .subscribe(form => this.upload(form))
