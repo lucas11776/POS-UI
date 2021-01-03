@@ -14,7 +14,7 @@ import { country } from '../../../../core/validators/form-validators';
 })
 export class EditAddressComponent implements OnInit {
   @Output('update') updateEvent = new EventEmitter<Address>();
-  @Input('address') address: Address = <any>{};
+  @Input('address') address: Address;
   formErrors = Errors;
   form: FormGroup;
 
@@ -24,10 +24,10 @@ export class EditAddressComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
-      address: [this.address.address || null, [RxwebValidators.pattern({ expression: { invalid: /^\d+\s[A-z]+\s[A-z]+/g } })]],
-      country_id: [this.address.country?.id || null, []],
-      city: [this.address.city || null, [RxwebValidators.minLength({ value: 3 }), RxwebValidators.maxLength({ value: 50 })]],
-      postal_code: [this.address.postal_code || null, [RxwebValidators.pattern({ expression: { invalid: /^\d{4,10}/ } })]],
+      address: [this.address?.address || null, [RxwebValidators.pattern({ expression: { invalid: /^\d+\s[A-z]+\s[A-z]+/g } })]],
+      country_id: [this.address?.country?.id || null, [], country(this._countriesService.countries$)],
+      city: [this.address?.city || null, [RxwebValidators.minLength({ value: 3 }), RxwebValidators.maxLength({ value: 50 })]],
+      postal_code: [this.address?.postal_code || null, [RxwebValidators.pattern({ expression: { invalid: /^\d{4,10}/ } })]],
     });
   }
 }

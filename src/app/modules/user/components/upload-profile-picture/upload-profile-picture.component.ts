@@ -4,6 +4,7 @@ import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { SubSink } from 'subsink';
 
 import { UploadProfilePicture } from '../../../../shared/models/user.model';
+import { file } from '../../../../core/validators/form-validators';
 
 @Component({
   selector: 'ks-upload-profile-picture',

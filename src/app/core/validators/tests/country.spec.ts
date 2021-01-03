@@ -3,10 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 
 import { country } from '../form-validators';
-import {
-    Countries as CountriesMock,
-    CountriesValidator as CountriesServiceMock
-} from '../../mocks/address.mock';
+import { Countries as CountriesMock } from '../../mocks/address.mock';
 
 describe('Country Validator', () => {
     let formGroup: FormGroup;
@@ -24,10 +21,19 @@ describe('Country Validator', () => {
         formBuilder = TestBed.inject(FormBuilder);
     });
 
-    xit('should check if validator returns invalid is country is invalid.', fakeAsync(() => {
+    it('should check if validator returns invalid is country is invalid.', fakeAsync(() => {
         let countries = CountriesMock(10);
-        formGroup = formBuilder.group({ country: [null, [country(of(countries))]] });
+        formGroup = formBuilder.group({ country: [null, [], country(of(countries))]});
         formGroup.controls.country.setValue(20);
+        tick();
         expect(formGroup.controls.country.errors).toEqual({ invalid: true });
+    }));
+
+    it('should check if validator returns null if country id does not exist.', fakeAsync(() => {
+        let countries = CountriesMock(10);
+        formGroup = formBuilder.group({ country: [null, [], country(of(countries))]});
+        formGroup.controls.country.setValue(1);
+        tick();
+        expect(formGroup.controls.country.errors).toBeNull();
     }));
 });

@@ -12,7 +12,7 @@ import {
 export const Country = (id: number = null): CountryInterface => {
     return {
         id: id == null ? Math.floor(Math.random() * 100) : id,
-        name: faker.address.country,
+        name: faker.address.country(),
     }
 }
 
@@ -46,6 +46,7 @@ export const CountriesValidator = (countries: CountryInterface[]): AsyncValidato
     return (control: AbstractControl): Promise<ValidationErrors|null> => {
         return new Promise(resolve => {
             let country = countries.filter(country => control.value == country.id);
+            /* istanbul ignore else */
             if(country.length == 0) resolve({ invalid: true });
             else resolve(null);
         });

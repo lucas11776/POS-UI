@@ -7,9 +7,10 @@ import faker from 'faker';
 import { EditAddressComponent } from './edit-address.component';
 import { CountriesService } from '../../../../core/services/countries.service';
 import {
-  UpdateAddress as UpdateAddressMock,
+  Address as AddressMock,
   Countries as CountriesMock,
-  CountriesValidator as CountriesValidatorMock
+  UpdateAddress as UpdateAddressMock,
+  CountriesValidator as CountriesValidatorMock,
 } from '../../../../core/mocks/address.mock';
 import { UpdateAddress } from '../../../../shared/models/address.model';
 import { Errors } from '../../../../shared/errors/form.error';
@@ -51,6 +52,18 @@ describe('EditAddressComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should get default form values.', () => {
+    const address = AddressMock();
+    component.address = address;
+    component.ngOnInit();
+    expect(component.form.value).toEqual(<UpdateAddress>{
+      address: address.address,
+      country_id: address.country.id,
+      city: address.city,
+      postal_code: address.postal_code
+    })
+  });
+
   it('should check if address is valid address pattern.', () => {
     updateAddress.address = 'Main Road 23';
     component.form.setValue(updateAddress);
@@ -76,11 +89,10 @@ describe('EditAddressComponent', () => {
   });
 
   it('should check if country_id is a valid country id.', fakeAsync(() => {
-    let countries = CountriesMock(10);
-    updateAddress.country_id = 20;
+    const countries = CountriesMock(10);
     component.form.controls.country_id.clearAsyncValidators();
-    component.form.controls.country_id.setAsyncValidators(CountriesValidatorMock(countries))
-    component.form.setValue(updateAddress);
+    component.form.controls.country_id.setAsyncValidators(CountriesValidatorMock(countries));
+    component.form.controls.country_id.setValue(20);
     component.form.controls.country_id.markAsDirty();
     tick();
     fixture.detectChanges();

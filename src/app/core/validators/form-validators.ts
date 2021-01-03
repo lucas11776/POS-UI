@@ -1,7 +1,6 @@
-import { AbstractControl, AsyncValidator, AsyncValidatorFn, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { filter, map } from 'rxjs/operators';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-
 
 import { WordsConfig } from './extension/words.config';
 import { FileConfig } from './extension/file.config';
@@ -28,7 +27,7 @@ export const country = (countries: Observable<Country[]>): AsyncValidatorFn => {
         return countries.pipe(
             map(countries => {
                 let country = countries.filter(country => country.id == control.value);
-                return country.length == 0 ? null : { invalid: true };
+                return country.length == 0 ? { invalid: true } : null;
             })
         )
     }
@@ -58,7 +57,6 @@ export const file = (config: FileConfig): ValidationErrors => {
                 if(!config.type.includes(file.type))
                     return { type: true };
             }
-
         }
         return null;
     }
